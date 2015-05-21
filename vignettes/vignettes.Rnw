@@ -1,0 +1,141 @@
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{ELMER.data: Supporting data for the ELMER package}
+% !Rnw weave = knitr
+\documentclass{article}
+<<style-knitr, eval=TRUE, echo=FALSE, results="asis">>=
+BiocStyle::latex()
+@
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+
+\title{ELMER.data: Supporting data for the ELMER package}
+\author {Lijing Yao [cre, aut], 
+Ben Berman [aut], 
+Peggy Farnham [aut]\\ 
+Hui Shen [ctb], 
+Peter Laird [ctb], 
+Simon Coetzee [ctb]}
+
+\begin{document}
+<<setup, include=FALSE, cache=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.align='center', cache=TRUE,par=TRUE)
+knit_hooks$set(par=function(before, options, envir){
+if (before && options$fig.show!='none') par(mar=c(1,1,.1,.1),cex.lab=1,cex.axis=1,mgp=c(2,.7,0),tcl=-.3)
+}, crop=hook_pdfcrop)
+@
+\maketitle
+
+\tableofcontents
+\section{Introduction}
+This document provides an introduction of the \Rpackage{ELMER.data}, which contains 
+supporting data for \Rpackage{ELMER}. \Rpackage{ELMER} is package using DNA methylation to 
+identify enhancers, and correlates enhancer state with expression of nearby genes 
+to identify one or more transcriptional targets. Transcription factor (TF) binding 
+site analysis of enhancers is coupled with expression analysis of all TFs to 
+infer upstream regulators. \Rpackage{ELMER} provide 5 necessary data for 
+\Rpackage{ELMER} analysis:
+
+1. Probes.motif: motif occurences within -/+100bp of probe sites on HM450K array.\\
+2. human.TF: All human transcription factors.\\
+3. Combined.TSS: Human TSS regions consist of TSS from hg19 UCSC gene and GENCODE V15.\\
+4. motif.relavent.TFs: TFs may recognize the same motif.\\
+5. Union.enhancer: A comprehensive list of genomic strong enhancers.\\
+
+\subsection{Installing and loading ELMER.data}
+To install this package, start R and enter
+<<install, eval=FALSE>>=
+source("http://bioconductor.org/biocLite.R")
+biocLite("ELMER.data")
+@
+<<loa, cache=TRUE>>=
+library("ELMER.data")
+library("GenomicRanges")
+@
+
+\section{Contents}
+\subsection{Probes.motif}
+
+Probes.motif provide information for motif occurences within -/+100bp of probe 
+sites on HM450K array. FIMO was used with a p-value < 0.0001 to scan a +/- 100bp 
+region around each probe on HM450K using Factorbook motif position weight 
+matrices (PWMs) and Jasper core human motif PWMs generated from the \Rpackage{MotifDb}.
+This data set is used in get.enriched.motif function in \Rpackage{ELMER} to calculate 
+Odds Ratio of motif enrichments for a given set of probes. This data is storaged 
+in a matrix with 485512 row and 91 column. Each row is each probe regions and each 
+column is motif from Factorbook and Jasper. The value 1 indicates the occurrence 
+of a motif in a particular probe and 0 means no occurrence.
+
+<<Probes.motif, cache=TRUE>>=
+data("Probes.motif")
+dim(Probes.motif)
+str(Probes.motif)
+@
+
+\subsection{human.TF}
+
+human.TF list all human transcription factors information such as gene id, symbol.
+It is a data frame contains symbols and gene ids for 1982 human trancription factor.
+This data is used for get.TFs function in \Rpackage{ELMER} to identify the TFs whose 
+expression highly associate with average DNA methylation motif sties.
+
+<<human.TF, cache=TRUE>>=
+data("human.TF")
+dim(human.TF)
+head(human.TF)
+@
+\subsection{Combined.TSS}
+
+Combined.TSS provide a comprehensive list of human hg19 annotated TSSs
+from UCSC gene and GENCODE V15. This is used for identification of distal 
+elements in get.feature.probe in \Rpackage{ELMER}. This data is stored as a GRanges
+object containing coordinates of combined TSS.
+
+<<Combined.TSS, cache=TRUE>>=
+data("Combined.TSS")
+Combined.TSS
+@
+
+\subsection{motif.relavent.TFs}
+
+motif.relavent.TFs list each motif and TFs that binding the motis. Multiple TFs may
+recognize a same motif such as TF family.  This data is stored as a list whose elements 
+are motifs and contents for each element are TFs which recognize the same motif that
+is the name of the element. This data is used in function get.TFs in \Rpackage{ELMER} 
+to identify the real regulator TF whose motif is enriched in a given set of probes 
+and expression associate with average DNA methylation of these motif sites.
+
+<<motif.relavent.TFs, cache=TRUE>>=
+data("motif.relavent.TFs")
+motif.relavent.TFs[1:2]
+@
+
+
+\subsection{Union.enhancer}
+
+Union.enhancer is a comprehensive list of genomic strong enhancers which comes 
+from a combination of enhancers from the Roadmap Epigenomics Mapping Consortium (REMC) 
+and the Encyclopedia of DNA Elements (ENCODE) Project, in which enhancers were 
+identified using ChromHMM for 98 tissues or cell lines. We used the union of 
+genomic elements labeled as EnhG1, EnhG2, EnhA1 or EnhA2 (representing intergenic 
+and intragenic active enhancers) in any of the 98 cell types, resulting in a total 
+of 389,967 non-overlapping enhancer regions. FANTOM5 enhancers (43,011) identified 
+by eRNAs for 400 distinct cell types were added to this list. This data is stored 
+as a GRanges object contains coordinates of this human comprehensive genomic enhancer set.
+It will be used in get.feature.probe in \Rpackage{ELMER} to identify the distal enhancer
+probes which are at least 2Kb awary from TSS regions and overlap with comprehensive 
+enhancers.
+
+<<Union.enhancer, cache=TRUE>>=
+data("Union.enhancer")
+Union.enhancer
+@
+
+
+\newpage
+<<finalsession, cache=TRUE>>=
+sessionInfo()
+@
+\end{document}
