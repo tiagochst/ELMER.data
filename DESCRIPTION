@@ -1,6 +1,6 @@
 Package: ELMER.data
 Title: Data for the ELMER package
-Version: 0.99.5
+Version: 1.0.0
 Author: Lijing Yao
 Maintainer: Lijing Yao <lijingya@usc.edu>
 Description: Supporting data for the ELMER package. It includes
