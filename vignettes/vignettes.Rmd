@@ -1,0 +1,184 @@
+---
+title: "ELMER.data: Supporting data for the ELMER package"
+author: "Lijing Yao, Ben Berman [aut], Peggy Farnham [aut]Hui Shen [ctb], Peter Laird [ctb], Simon Coetzee [ctb], Tiago Chedraoui Silva [ctb]"
+date: "`r Sys.Date()`"
+output: 
+  BiocStyle::html_document:
+    toc: true
+    number_sections: true
+    toc_depth: 3
+    highlight: haddock
+    fig_caption: yes
+  BiocStyle::pdf_document2:
+    toc: true
+    number_sections: true
+    toc_depth: 3
+    highlight: haddock
+    fig_caption: yes     
+    
+references:
+- id: ref1
+  title: HOCOMOCO a comprehensive collection of human transcription factor binding sites models
+  author: 
+  - family: Kulakovskiy, Ivan V and Medvedeva, Yulia A and Schaefer, Ulf and Kasianov, Artem S and Vorontsov, Ilya E and Bajic, Vladimir B and Makeev, Vsevolod
+    given:
+  journal: Nucleic acids research
+  volume: 41
+  number: D1
+  pages: D195--D202
+  issued:
+    year: 2013    
+
+- id: heinz2010simple
+  title: Simple combinations of lineage-determining transcription factors prime cis-regulatory elements required for macrophage and B cell identities
+  author: 
+  - family: Heinz, Sven and Benner, Christopher and Spann, Nathanael and Bertolino, Eric and Lin, Yin C and Laslo, Peter and Cheng, Jason X and Murre, Cornelis and Singh, Harinder and Glass, Christopher K
+    given:
+  journal: Molecular cell
+  volume: 38
+  number: 4
+  pages: 576--589
+  issued:
+    year: 2010    
+    
+- id: ELMER
+  title: Inferring regulatory element landscapes and transcription factor networks from cancer methylomes
+  author: 
+  - family: Yao, L., Shen, H., Laird, P. W., Farnham, P. J., & Berman, B. P. 
+    given:
+  journal: Genome biology
+  volume: 16
+  number: 1
+  pages: 105
+  issued:
+    year: 2015 
+
+    
+vignette: >
+  %\VignetteIndexEntry{ELMER.data: Supporting data for the ELMER package}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---   
+
+```{r, echo = FALSE,hide=TRUE, message=FALSE,warning=FALSE}
+devtools::load_all(".")
+```
+
+# Introduction
+This document provides an introduction of the \Biocpkg{ELMER.data}, which contains 
+supporting data for \Biocpkg{ELMER} [@ELMER]. \Biocpkg{ELMER} is package using DNA methylation to 
+identify enhancers, and correlates enhancer state with expression of nearby genes 
+to identify one or more transcriptional targets. Transcription factor (TF) binding 
+site analysis of enhancers is coupled with expression analysis of all TFs to 
+infer upstream regulators. \Biocpkg{ELMER} provide 5 necessary data for 
+\Biocpkg{ELMER} analysis:
+
+1. Probes.motif: motif occurences within -/+250bp of probe sites on HM450K/EPIC array.
+2. human.TF: All human transcription factors.
+3. motif.relavent.TFs: TFs may recognize the same motif.
+4. Union.enhancer: A comprehensive list of genomic strong enhancers.
+
+## Installing and loading ELMER.data
+To install this package, start R and enter
+
+```{r, eval = FALSE}
+source("http://bioconductor.org/biocLite.R")
+biocLite("ELMER.data")
+library("ELMER.data")
+library("GenomicRanges")
+```
+
+# Contents
+## Probes.motif
+
+Probes.motif provide information for motif occurences within -/+250bp of probe 
+sites on HM450K/EPIC array. HOMER [@heinz2010simple] was used with a p-value < 0.0001 to scan a +/- 250bp 
+region around each probe on HM450K/EPIC using HOCOMOCO V10 motif position weight 
+matrices (PWMs) which provides transcription factor (TF) binding models for more than 600 human TFs.
+This data set is used in get.enriched.motif function in \Biocpkg{ELMER} to calculate 
+Odds Ratio of motif enrichments for a given set of probes. This data is storaged 
+in a sparse matrix with wuth 640 columns, there is one matrix for HM450K aligned to hg19, one for HM450K  aligned to hg38,
+one for EPIC aligned to hg19, one for EPIC  aligned to hg38. Each row is each probe regions (annotation of the regions used can be found in 
+[this repository](http://zwdzwd.github.io/InfiniumAnnotation)) and each 
+column is motif from [http://hocomoco.autosome.ru/](HOCOMOCO) [@ref1]. The value 1 indicates the occurrence 
+of a motif in a particular probe and 0 means no occurrence.
+
+```{r}
+data("Probes.motif.hg19.450K")
+dim(Probes.motif.hg19.450K)
+str(Probes.motif.hg19.450K)
+```
+
+```{r}
+data("Probes.motif.hg38.450K")
+dim(Probes.motif.hg38.450K)
+str(Probes.motif.hg38.450K)
+```
+
+```{r}
+data("Probes.motif.hg19.EPIC")
+dim(Probes.motif.hg19.EPIC)
+str(Probes.motif.hg19.EPIC)
+```
+
+```{r}
+data("Probes.motif.hg38.EPIC")
+dim(Probes.motif.hg38.EPIC)
+str(Probes.motif.hg38.EPIC)
+```
+
+## human.TF
+
+human.TF list all human transcription factors information such as gene id, symbol.
+It is a data frame contains symbols and gene ids for 1982 human trancription factor.
+This data is used for get.TFs function in \Biocpkg{ELMER} to identify the TFs whose 
+expression highly associate with average DNA methylation motif sties.
+
+```{r}
+data("human.TF")
+dim(human.TF)
+head(human.TF)
+```
+
+## motif.relavent.TFs
+
+motif.relavent.TFs list each motif and TFs that binding the motis. Multiple TFs may
+recognize a same motif such as TF family.  This data is stored as a list whose elements 
+are motifs and contents for each element are TFs which recognize the same motif that
+is the name of the element. This data is used in function get.TFs in \Biocpkg{ELMER} 
+to identify the real regulator TF whose motif is enriched in a given set of probes 
+and expression associate with average DNA methylation of these motif sites.
+
+```{r}
+data("motif.relavent.TFs")
+motif.relavent.TFs[1:2]
+```
+
+
+## Union.enhancer
+
+Union.enhancer is a comprehensive list of genomic strong enhancers which comes 
+from a combination of enhancers from the Roadmap Epigenomics Mapping Consortium (REMC) 
+and the Encyclopedia of DNA Elements (ENCODE) Project, in which enhancers were 
+identified using ChromHMM for 98 tissues or cell lines. We used the union of 
+genomic elements labeled as EnhG1, EnhG2, EnhA1 or EnhA2 (representing intergenic 
+and intragenic active enhancers) in any of the 98 cell types, resulting in a total 
+of 389,967 non-overlapping enhancer regions. FANTOM5 enhancers (43,011) identified 
+by eRNAs for 400 distinct cell types were added to this list. This data is stored 
+as a GRanges object contains coordinates of this human comprehensive genomic enhancer set.
+It will be used in get.feature.probe in \Biocpkg{ELMER} to identify the distal enhancer
+probes which are at least 2Kb awary from TSS regions and overlap with comprehensive 
+enhancers.
+
+```{r}
+data("Union.enhancer")
+Union.enhancer
+```
+
+# Session Information
+******
+```{r sessionInfo}
+sessionInfo()
+```
+
+# References
