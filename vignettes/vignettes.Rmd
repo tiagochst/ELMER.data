@@ -79,13 +79,10 @@ supporting data for \Biocpkg{ELMER} [@ELMER]. \Biocpkg{ELMER} is package using D
 identify enhancers, and correlates enhancer state with expression of nearby genes 
 to identify one or more transcriptional targets. Transcription factor (TF) binding 
 site analysis of enhancers is coupled with expression analysis of all TFs to 
-infer upstream regulators. \Biocpkg{ELMER} provide 5 necessary data for 
+infer upstream regulators. \Biocpkg{ELMER.data} provide 4 necessary data for 
 \Biocpkg{ELMER} analysis:
 
-1. Probes.motif: motif occurences within -/+250bp of probe sites on HM450K/EPIC array.
-2. human.TF: All human transcription factors.
-3. motif.relavent.TFs: TFs may recognize the same motif.
-4. Union.enhancer: A comprehensive list of genomic strong enhancers.
+Probes.motif: motif occurences within -/+250bp of probe sites on HM450K/EPIC array aligned against hg19/hg38.
 
 ## Installing and loading ELMER.data
 To install this package, start R and enter
@@ -136,19 +133,6 @@ dim(Probes.motif.hg38.EPIC)
 str(Probes.motif.hg38.EPIC)
 ```
 
-## human.TF
-
-human.TF list all human transcription factors information such as gene id, symbol.
-It is a data frame contains symbols and gene ids for 1982 human trancription factor.
-This data is used for get.TFs function in \Biocpkg{ELMER} to identify the TFs whose 
-expression highly associate with average DNA methylation motif sties.
-
-```{r}
-data("human.TF")
-dim(human.TF)
-head(human.TF)
-```
-
 ## motif.relavent.TFs
 
 motif.relavent.TFs list each TF motif and TFs that binding the motis. Multiple TFs may
@@ -167,26 +151,6 @@ data("motif.relavent.TFs")
 motif.relavent.TFs[1:2]
 ```
 
-
-## Union.enhancer
-
-Union.enhancer is a comprehensive list of genomic strong enhancers which comes 
-from a combination of enhancers from the Roadmap Epigenomics Mapping Consortium (REMC) 
-and the Encyclopedia of DNA Elements (ENCODE) Project, in which enhancers were 
-identified using ChromHMM for 98 tissues or cell lines. We used the union of 
-genomic elements labeled as EnhG1, EnhG2, EnhA1 or EnhA2 (representing intergenic 
-and intragenic active enhancers) in any of the 98 cell types, resulting in a total 
-of 389,967 non-overlapping enhancer regions. FANTOM5 enhancers (43,011) identified 
-by eRNAs for 400 distinct cell types were added to this list. This data is stored 
-as a GRanges object contains coordinates of this human comprehensive genomic enhancer set.
-It will be used in get.feature.probe in \Biocpkg{ELMER} to identify the distal enhancer
-probes which are at least 2Kb awary from TSS regions and overlap with comprehensive 
-enhancers.
-
-```{r}
-data("Union.enhancer")
-Union.enhancer
-```
 
 # Session Information
 ******
