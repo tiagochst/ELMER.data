@@ -168,9 +168,28 @@ probes which are at least 2Kb awary from TSS regions and overlap with comprehens
 enhancers.
 
 ```{r}
-data("Union.enhancer")
-Union.enhancer
+data("Union.enhancer.hg19")
+Union.enhancer.hg19
 ```
+
+The data used to create the Union.enhancer object was aligned 
+against the reference genome hg19. 
+In order to align it against hg38 we used liftOver.
+
+```{r, eval = FALSE}
+data("Union.enhancer.hg19")
+file <- "http://hgdownload.cse.ucsc.edu/gbdb/hg19/liftOver/hg19ToHg38.over.chain.gz"
+downloader::download(file,basename(file))
+R.utils::gunzip(basename(file))
+chain <- import.chain("hg19ToHg38.over.chain")
+Union.enhancer.hg38 <- unlist(rtracklayer::liftOver(Union.enhancer.hg19, chain))
+Union.enhancer.hg38
+```
+```{r}
+data("Union.enhancer.hg38")
+Union.enhancer.hg38
+```
+
 # Session Information
 ******
 ```{r sessionInfo}
