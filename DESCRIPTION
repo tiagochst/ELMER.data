@@ -6,12 +6,18 @@ Author: Lijing Yao
     Simon Coetzee,
     Ben Berman
 Maintainer: Tiago Chedraoui Silva <tiagochst@usp.br>
-Description: Supporting data for the ELMER package. It includes Probe.motif.hg38.EPIC, Probe.motif.hg19.EPIC, Probe.motif.hg38.450k, Probe.motif.hg19.450k.
+Description: Supporting data for the ELMER package. It includes
+    Probe.motif.hg38.EPIC, Probe.motif.hg19.EPIC, Probe.motif.hg38.450k,
+    Probe.motif.hg19.450k.
 License: GPL-3
 LazyData: true
-Depends: R (>= 3.2.0)
-Imports: GenomicRanges
-Suggests: BiocStyle, knitr
+Depends:
+    R (>= 3.2.0)
+Imports:
+    GenomicRanges
+Suggests:
+    BiocStyle,
+    knitr
 biocViews: AssayDomainData, TechnologyData, OrganismData
 VignetteBuilder: knitr
-
+RoxygenNote: 5.0.1
