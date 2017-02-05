@@ -63,6 +63,17 @@ references:
   issued:
     year: 2014 
 
+- id: zhou2016comprehensive
+  title: Comprehensive characterization, annotation and innovative use of Infinium DNA methylation BeadChip probes
+  author: 
+  - family: Zhou, Wanding and Laird, Peter W and Shen, Hui
+    given:
+  journal: Nucleic Acids Research
+  pages: gkw967
+  issued:
+    year: 2016
+
+
 vignette: >
   %\VignetteIndexEntry{ELMER.data: Supporting data for the ELMER package}
   %\VignetteEngine{knitr::rmarkdown}
@@ -96,6 +107,35 @@ library("GenomicRanges")
 ```
 
 # Contents
+
+## Probes information
+
+Probes information were retrieved from (http://zwdzwd.github.io/InfiniumAnnotation)[http://zwdzwd.github.io/InfiniumAnnotation] [@zhou2016comprehensive]
+```{r}
+downloadInfiniumAnnotation <- function(){
+  for(plat in c("450K","EPIC")) {
+    for(genome in c("hg38","hg19")) {
+      base <- "http://zwdzwd.io/InfiniumAnnotation/current/"
+      if(plat == "EPIC") {
+        annotation <- paste0(base,"EPIC/EPIC.manifest.rda")
+      } else {
+        annotation <- paste0(base,"hm450/hm450.manifest.rda")
+      }
+      if(genome == "hg38") annotation <- gsub(".rda",".hg38.rda", annotation)
+
+      if(!file.exists(basename(annotation))) {
+        if(Sys.info()["sysname"] == "Windows") mode <- "wb" else  mode <- "w"
+        tryCatch({
+          downloader::download(annotation, basename(annotation), mode = mode)
+        },error = function(e) {
+          downloader::download(annotation, basename(annotation), mode = mode)
+        })
+      }
+    }
+  }
+}
+```
+
 ## Probes.motif
 
 Probes.motif provides information for motif occurences within -/+250bp of probe 
@@ -137,26 +177,15 @@ str(Probes.motif.hg38.EPIC)
 The following code was used to create the objects:
 ```{r}
 getInfiniumAnnotation <- function(plat = "450K", genome = "hg38"){
-  if(plat == "EPIC") {
-    annotation <- "http://zwdzwd.io/InfiniumAnnotation/current/EPIC/EPIC.manifest.rda"
-  } else {
-    annotation <- "http://zwdzwd.io/InfiniumAnnotation/current/hm450/hm450.manifest.rda"
-  }
-  if(genome == "hg38") annotation <- gsub(".rda",".hg38.rda", annotation)
-  message(paste0("Adding annotation for DNA methylation from: ",annotation))
-  
-  if(!file.exists(basename(annotation))) {
-    if(Sys.info()["sysname"] == "Windows") mode <- "wb" else  mode <- "w"
-    tryCatch({
-      downloader::download(annotation, basename(annotation), mode = mode)
-    },error = function(e) {
-      downloader::download(annotation, basename(annotation), mode = mode)
-    })
-  }
-  annotation <- get(load(basename(annotation)))
-  return(annotation)  
+    message("Loading object: ",file)
+    newenv <- new.env()
+    if(plat == "EPIC" & genome == "hg19") data("EPIC.manifest", package = "ELMER.data",envir=newenv)
+    if(plat == "EPIC" & genome == "hg38") data("EPIC.manifest.hg38", package = "ELMER.data",envir=newenv)
+    if(plat == "450K" & genome == "hg19") data("hm450.manifest", package = "ELMER.data",envir=newenv)
+    if(plat == "450K" & genome == "hg38") data("hm450.manifest.hg38", package = "ELMER.data",envir=newenv)
+    annotation <- get(ls(newenv)[1],envir=newenv)   
+    return(annotation)  
 }
-
 # To find for each probe the know motif we will use HOMER software (http://homer.salk.edu/homer/)
 # Step:
 # 1 - get DNA methylation probes annotation with the regions
