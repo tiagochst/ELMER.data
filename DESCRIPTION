@@ -9,16 +9,17 @@ Maintainer: Tiago Chedraoui Silva <tiagochst@usp.br>
 Description: 
     Supporting data for the ELMER package. 
     It includes:
-    - Probe.motif.hg38.EPIC
-    - Probe.motif.hg19.EPIC
-    - Probe.motif.hg38.450k
-    - Probe.motif.hg19.450k
-    - Union.enhancer.hg19
-    - Union.enhancer.hg38
-    - EPIC.manifest
-    - EPIC.manifest.hg38
-    - hm450.manifest
-    - hm450.manifest.hg38
+      - Probe.motif.hg38.EPIC
+      - Probe.motif.hg19.EPIC
+      - Probe.motif.hg38.450k
+      - Probe.motif.hg19.450k
+      - Union.enhancer.hg19
+      - Union.enhancer.hg38
+      - EPIC.manifest
+      - EPIC.manifest.hg38
+      - hm450.manifest
+      - hm450.manifest.hg38
+      - motif.relevant.TFs.
 License: GPL-3
 LazyData: true
 Depends:

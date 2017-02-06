@@ -111,7 +111,7 @@ library("GenomicRanges")
 ## Probes information
 
 Probes information were retrieved from (http://zwdzwd.github.io/InfiniumAnnotation)[http://zwdzwd.github.io/InfiniumAnnotation] [@zhou2016comprehensive]
-```{r}
+```{r, eval=FALSE, include=TRUE}
 downloadInfiniumAnnotation <- function(){
   for(plat in c("450K","EPIC")) {
     for(genome in c("hg38","hg19")) {
@@ -134,6 +134,12 @@ downloadInfiniumAnnotation <- function(){
     }
   }
 }
+```
+```{r}
+data("EPIC.manifest")
+data("EPIC.manifest.hg38")
+data("hm450.manifest.hg38")
+data("hm450.manifest")
 ```
 
 ## Probes.motif
@@ -175,7 +181,7 @@ str(Probes.motif.hg38.EPIC)
 ```
 
 The following code was used to create the objects:
-```{r}
+```{r, eval=FALSE, include=TRUE}
 getInfiniumAnnotation <- function(plat = "450K", genome = "hg38"){
     message("Loading object: ",file)
     newenv <- new.env()
@@ -272,7 +278,7 @@ save(Probes.motif.hg19.EPIC, file = "Probes.motif.hg19.EPIC.rda", compress = "xz
 save(Probes.motif.hg38.EPIC, file = "Probes.motif.hg38.EPIC.rda", compress = "xz")
 ```
 
-## motif.relavent.TFs
+## motif.relevant.TFs
 
 motif.relavent.TFs list each TF motif and TFs that binding the motis. Multiple TFs may
 recognize a same motif such as TF family.  
@@ -285,8 +291,37 @@ is the name of the element. This data is used in function get.TFs in \Biocpkg{EL
 to identify the real regulator TF whose motif is enriched in a given set of probes 
 and expression associate with average DNA methylation of these motif sites.
 
+The following code was used to create the objects:
+```{r, eval=FALSE, include=TRUE}
+library(plyr)
+library(rvest)
+library(xml2)
+createMotifRelevantTfs <- function(){
+  if(!file.exists("motif.relavent.TFs.rda")){
+    # Download from http://hocomoco.autosome.ru/human/mono
+    tf.family <- "http://hocomoco.autosome.ru/human/mono" %>% read_html()  %>%  html_table()
+    tf.family <- tf.family[[1]]
+    # Split TF for each family, this will help us map for each motif which are the some ones in the family
+    # basicaly: for a TF get its family then get all TF in that family
+    family <- split(tf.family,f = tf.family$`TF family`)
+    motif.relavent.TFs <- plyr::alply(tf.family,1, function(x){  
+      f <- x$`TF family`
+      if(f == "") return(x$`Transcription factor`) # Case without family, we will get only the same object
+      return(unique(family[as.character(f)][[1]]$`Transcription factor`))
+    },.progress = "text")
+    #names(motif.relavent.TFs) <- tf.family$`Transcription factor`
+    names(motif.relavent.TFs) <- tf.family$Model
+    # Cleaning object
+    attr(motif.relavent.TFs,which="split_type") <- NULL
+    attr(motif.relavent.TFs,which="split_labels") <- NULL
+    save(motif.relavent.TFs, file = "motif.relevant.TFs.rda", compress = "xz")
+  }
+}
+```
+
+
 ```{r}
-data("motif.relavent.TFs")
+data("motif.relevant.TFs")
 motif.relavent.TFs[1:2]
 ```
 
@@ -314,7 +349,7 @@ The data used to create the Union.enhancer object was aligned
 against the reference genome hg19. 
 In order to align it against hg38 we used liftOver.
 
-```{r, eval = FALSE}
+```{r, eval=FALSE, include=TRUE}
 data("Union.enhancer.hg19")
 file <- "http://hgdownload.cse.ucsc.edu/gbdb/hg19/liftOver/hg19ToHg38.over.chain.gz"
 downloader::download(file,basename(file))
