@@ -112,25 +112,18 @@ library("GenomicRanges")
 
 Probes information were retrieved from (http://zwdzwd.github.io/InfiniumAnnotation)[http://zwdzwd.github.io/InfiniumAnnotation] [@zhou2016comprehensive]
 ```{r, eval=FALSE, include=TRUE}
-downloadInfiniumAnnotation <- function(){
-  for(plat in c("450K","EPIC")) {
-    for(genome in c("hg38","hg19")) {
-      base <- "http://zwdzwd.io/InfiniumAnnotation/current/"
-      if(plat == "EPIC") {
-        annotation <- paste0(base,"EPIC/EPIC.manifest.rda")
-      } else {
-        annotation <- paste0(base,"hm450/hm450.manifest.rda")
-      }
-      if(genome == "hg38") annotation <- gsub(".rda",".hg38.rda", annotation)
-
-      if(!file.exists(basename(annotation))) {
-        if(Sys.info()["sysname"] == "Windows") mode <- "wb" else  mode <- "w"
-        tryCatch({
-          downloader::download(annotation, basename(annotation), mode = mode)
-        },error = function(e) {
-          downloader::download(annotation, basename(annotation), mode = mode)
-        })
-      }
+for(plat in c("450K","EPIC")) {
+  for(genome in c("hg38","hg19")) {
+    base <- "http://zwdzwd.io/InfiniumAnnotation/current/"
+    if(plat == "EPIC") {
+      annotation <- paste0(base,"EPIC/EPIC.manifest.rda")
+    } else {
+      annotation <- paste0(base,"hm450/hm450.manifest.rda")
+    }
+    if(genome == "hg38") annotation <- gsub(".rda",".hg38.rda", annotation)
+    if(!file.exists(basename(annotation))) {
+      if(Sys.info()["sysname"] == "Windows") mode <- "wb" else  mode <- "w"
+      downloader::download(annotation, basename(annotation), mode = mode)
     }
   }
 }
