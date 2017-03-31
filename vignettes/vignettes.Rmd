@@ -225,14 +225,14 @@ for(plat in c("450K","EPIC")){
             write.table(df[((j * step) + 1):end,], file = file.aux, col.names = F, quote = F,row.names = F,sep = "\t")
             
             # STEP 3
-            cmd <- paste0("source ~/.bash_rc; annotatePeaks.pl " ,file.aux, " ", gen, " -m ", basename(TFBS.motif), " -size 500 -cpu 12 > ", gsub(".bed",".txt",file.aux))
+            cmd <- paste("source ~/.bash_rc; annotatePeaks.pl" ,file.aux, gen, "-m", basename(TFBS.motif), "-size 500 -cpu 12 >", gsub(".bed",".txt",file.aux))
             system(cmd)
           }
         }
         # We will merge the results from each file into one
         peaks <- NULL
         for(j in 0:floor(n/step)){
-          aux <-  read_tsv(paste0(plat,gen,"_",j,".txt"))
+          aux <-  readr::read_tsv(paste0(plat,gen,"_",j,".txt"))
           colnames(aux)[1] <- "PeakID"
           if(is.null(peaks)) {
             peaks <- aux
