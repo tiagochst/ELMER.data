@@ -215,7 +215,7 @@ for(plat in c("450K","EPIC")){
                          names=names(gr),
                          scores=c(rep(".", length(gr))),
                          strands=strand(gr))
-        step <- 100000 # nb of lines in each file 100K was selected to not explode RAM
+        step <- 50000 # nb of lines in each file 50K was selected to not explode RAM
         n <- nrow(df)
         for(j in 0:floor(n/step)){
           # STEP 2
