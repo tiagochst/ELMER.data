@@ -112,25 +112,18 @@ library("GenomicRanges")
 
 Probes information were retrieved from (http://zwdzwd.github.io/InfiniumAnnotation)[http://zwdzwd.github.io/InfiniumAnnotation] [@zhou2016comprehensive]
 ```{r, eval=FALSE, include=TRUE}
-downloadInfiniumAnnotation <- function(){
-  for(plat in c("450K","EPIC")) {
-    for(genome in c("hg38","hg19")) {
-      base <- "http://zwdzwd.io/InfiniumAnnotation/current/"
-      if(plat == "EPIC") {
-        annotation <- paste0(base,"EPIC/EPIC.manifest.rda")
-      } else {
-        annotation <- paste0(base,"hm450/hm450.manifest.rda")
-      }
-      if(genome == "hg38") annotation <- gsub(".rda",".hg38.rda", annotation)
-
-      if(!file.exists(basename(annotation))) {
-        if(Sys.info()["sysname"] == "Windows") mode <- "wb" else  mode <- "w"
-        tryCatch({
-          downloader::download(annotation, basename(annotation), mode = mode)
-        },error = function(e) {
-          downloader::download(annotation, basename(annotation), mode = mode)
-        })
-      }
+for(plat in c("450K","EPIC")) {
+  for(genome in c("hg38","hg19")) {
+    base <- "http://zwdzwd.io/InfiniumAnnotation/current/"
+    if(plat == "EPIC") {
+      annotation <- paste0(base,"EPIC/EPIC.manifest.rda")
+    } else {
+      annotation <- paste0(base,"hm450/hm450.manifest.rda")
+    }
+    if(genome == "hg38") annotation <- gsub(".rda",".hg38.rda", annotation)
+    if(!file.exists(basename(annotation))) {
+      if(Sys.info()["sysname"] == "Windows") mode <- "wb" else  mode <- "w"
+      downloader::download(annotation, basename(annotation), mode = mode)
     }
   }
 }
@@ -222,7 +215,7 @@ for(plat in c("450K","EPIC")){
                          names=names(gr),
                          scores=c(rep(".", length(gr))),
                          strands=strand(gr))
-        step <- 100000 # nb of lines in each file 100K was selected to not explode RAM
+        step <- 50000 # nb of lines in each file 50K was selected to not explode RAM
         n <- nrow(df)
         for(j in 0:floor(n/step)){
           # STEP 2
@@ -232,14 +225,14 @@ for(plat in c("450K","EPIC")){
             write.table(df[((j * step) + 1):end,], file = file.aux, col.names = F, quote = F,row.names = F,sep = "\t")
             
             # STEP 3
-            cmd <- paste0("source ~/.bash_rc; annotatePeaks.pl " ,file.aux, " ", gen, " -m ", basename(TFBS.motif), " -size 500 -cpu 12 > ", gsub(".bed",".txt",file.aux))
+            cmd <- paste("source ~/.bash_rc; annotatePeaks.pl" ,file.aux, gen, "-m", basename(TFBS.motif), "-size 500 -cpu 12 >", gsub(".bed",".txt",file.aux))
             system(cmd)
           }
         }
         # We will merge the results from each file into one
         peaks <- NULL
         for(j in 0:floor(n/step)){
-          aux <-  read_tsv(paste0(plat,gen,"_",j,".txt"))
+          aux <-  readr::read_tsv(paste0(plat,gen,"_",j,".txt"))
           colnames(aux)[1] <- "PeakID"
           if(is.null(peaks)) {
             peaks <- aux
