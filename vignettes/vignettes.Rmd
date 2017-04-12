@@ -205,9 +205,9 @@ for(plat in c("450K","EPIC")){
         gr <- getInfiniumAnnotation(plat = plat,genome =  gen)
         
         # This will remove masked probes. They have poor quality and might be arbitrarily positioned (Wanding Zhou)
-        print(table(gr$MASK.mapping))
-        gr <- gr[!gr$MASK.mapping]
-        print(table(gr$MASK.mapping))
+        print(table(gr$MASK.general))
+        gr <- gr[!gr$MASK.general]
+        print(table(gr$MASK.general))
         
         df <- data.frame(seqnames=seqnames(gr),
                          starts=as.integer(start(gr)),
