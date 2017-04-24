@@ -110,7 +110,7 @@ library("GenomicRanges")
 
 ## Probes information
 
-Probes information were retrieved from (http://zwdzwd.github.io/InfiniumAnnotation)[http://zwdzwd.github.io/InfiniumAnnotation] [@zhou2016comprehensive]
+Probes information were retrieved from [http://zwdzwd.github.io/InfiniumAnnotation](http://zwdzwd.github.io/InfiniumAnnotation) [@zhou2016comprehensive]
 ```{r, eval=FALSE, include=TRUE}
 for(plat in c("450K","EPIC")) {
   for(genome in c("hg38","hg19")) {
