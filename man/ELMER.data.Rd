@@ -34,5 +34,6 @@ data("EPIC.manifest.hg38")
 data("hm450.manifest")
 data("hm450.manifest.hg38")
 data("motif.relevant.TFs")
+data("elmer.data.example")
 }
 \keyword{utilities}

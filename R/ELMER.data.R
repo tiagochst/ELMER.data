@@ -32,6 +32,7 @@
 #' data("hm450.manifest")
 #' data("hm450.manifest.hg38")
 #' data("motif.relevant.TFs")
+#' data("elmer.data.example")
 NULL
 
 #' A GRanges containing hg19 annotation with suggested overall masking for EPIC platform
@@ -196,6 +197,21 @@ NULL
 #' @keywords internal
 #' @name data
 #' @format A MultiAssayExperiment for 234 Samples (8 normal samples, 226 Primary solid tumor)
+#' #' @examples
+#' data("elmer.data.example")
+NULL
+
+#' A MultiAssayExperiment containing
+#' DNA methylation data: 16 promoter probes from platform 450K 
+#' Gene Expression data: 3808 genes
+#' for 234 samples from TCGA-LUSC.
+#' This data is used in the examples of ELMER package
+#' @docType data
+#' @keywords internal
+#' @name data
+#' @format A MultiAssayExperiment for 234 Samples (8 normal samples, 226 Primary solid tumor)
+#' #' @examples
+#' data("elmer.data.example.promoter")
 NULL
 
 #' A matrix containing DNA methylation beta-values from TCGA

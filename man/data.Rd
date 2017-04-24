@@ -3,16 +3,25 @@
 \docType{data}
 \name{data}
 \alias{data}
+\alias{data}
 \title{A MultiAssayExperiment containing
 DNA methylation data: 101 probes from platform 450K 
 Gene Expression data: 1026 genes
 for 234 samples from TCGA-LUSC.
 This data is used in the examples of ELMER package}
-\format{A MultiAssayExperiment for 234 Samples (8 normal samples, 226 Primary solid tumor)}
+\format{A MultiAssayExperiment for 234 Samples (8 normal samples, 226 Primary solid tumor)
+#' @examples
+data("elmer.data.example")}
 \description{
 A MultiAssayExperiment containing
 DNA methylation data: 101 probes from platform 450K 
 Gene Expression data: 1026 genes
+for 234 samples from TCGA-LUSC.
+This data is used in the examples of ELMER package
+
+A MultiAssayExperiment containing
+DNA methylation data: 16 promoter probes from platform 450K 
+Gene Expression data: 3808 genes
 for 234 samples from TCGA-LUSC.
 This data is used in the examples of ELMER package
 }
