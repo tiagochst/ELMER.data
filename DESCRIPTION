@@ -20,7 +20,6 @@ Description:
       - hm450.manifest
       - hm450.manifest.hg38
       - elmer.data.example
-      - motif.relevant.TFs.
 License: GPL-3
 LazyData: true
 Depends:

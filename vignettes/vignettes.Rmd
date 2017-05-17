@@ -3,6 +3,12 @@ title: "ELMER.data: Supporting data for the ELMER package"
 author: "Lijing Yao, Ben Berman [aut], Peggy Farnham [aut]Hui Shen [ctb], Peter Laird [ctb], Simon Coetzee [ctb], Tiago Chedraoui Silva [ctb]"
 date: "`r Sys.Date()`"
 output: 
+  html_notebook:
+    toc: true
+    number_sections: true
+    toc_depth: 3
+    highlight: haddock
+    fig_caption: yes
   BiocStyle::html_document:
     toc: true
     number_sections: true
@@ -10,12 +16,12 @@ output:
     highlight: haddock
     fig_caption: yes
   BiocStyle::pdf_document2:
+    
     toc: true
     number_sections: true
     toc_depth: 3
     highlight: haddock
     fig_caption: yes     
-    
 references:
 - id: ref1
   title: HOCOMOCO a comprehensive collection of human transcription factor binding sites models
@@ -28,7 +34,6 @@ references:
   pages: D195--D202
   issued:
     year: 2013    
-
 - id: heinz2010simple
   title: Simple combinations of lineage-determining transcription factors prime cis-regulatory elements required for macrophage and B cell identities
   author: 
@@ -39,8 +44,8 @@ references:
   number: 4
   pages: 576--589
   issued:
-    year: 2010    
     
+    year: 2010    
 - id: ELMER
   title: Inferring regulatory element landscapes and transcription factor networks from cancer methylomes
   author: 
@@ -52,7 +57,6 @@ references:
   pages: 105
   issued:
     year: 2015 
-
 - id: wingender2014tfclass
   title: TFClass a classification of human transcription factors and their rodent orthologs
   author: 
@@ -62,7 +66,6 @@ references:
   pages: gku1064
   issued:
     year: 2014 
-
 - id: zhou2016comprehensive
   title: Comprehensive characterization, annotation and innovative use of Infinium DNA methylation BeadChip probes
   author: 
@@ -72,12 +75,12 @@ references:
   pages: gkw967
   issued:
     year: 2016
-
-
 vignette: >
+  \usepackage[utf8]{inputenc}
   %\VignetteIndexEntry{ELMER.data: Supporting data for the ELMER package}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+editor_options: 
+  chunk_output_type: inline
 ---   
 
 ```{r, echo = FALSE,hide=TRUE, message=FALSE,warning=FALSE}
@@ -271,52 +274,7 @@ save(Probes.motif.hg19.EPIC, file = "Probes.motif.hg19.EPIC.rda", compress = "xz
 save(Probes.motif.hg38.EPIC, file = "Probes.motif.hg38.EPIC.rda", compress = "xz")
 ```
 
-## motif.relevant.TFs
 
-motif.relavent.TFs list each TF motif and TFs that binding the motis. Multiple TFs may
-recognize a same motif such as TF family.  
-The association between each motif famil and transcription factor was created using the 
-(HOCOMOCO)[http://hocomoco.autosome.ru/human/mono] which TF structural families 
-was created according to TFClass [@wingender2014tfclass]
-This data is stored as a list whose elements 
-are motifs and contents for each element are TFs which recognize the same motif that
-is the name of the element. This data is used in function get.TFs in \Biocpkg{ELMER} 
-to identify the real regulator TF whose motif is enriched in a given set of probes 
-and expression associate with average DNA methylation of these motif sites.
-
-The following code was used to create the objects:
-```{r, eval=FALSE, include=TRUE}
-library(plyr)
-library(rvest)
-library(xml2)
-createMotifRelevantTfs <- function(){
-  if(!file.exists("motif.relavent.TFs.rda")){
-    # Download from http://hocomoco.autosome.ru/human/mono
-    tf.family <- "http://hocomoco.autosome.ru/human/mono" %>% read_html()  %>%  html_table()
-    tf.family <- tf.family[[1]]
-    # Split TF for each family, this will help us map for each motif which are the some ones in the family
-    # basicaly: for a TF get its family then get all TF in that family
-    family <- split(tf.family,f = tf.family$`TF family`)
-    motif.relavent.TFs <- plyr::alply(tf.family,1, function(x){  
-      f <- x$`TF family`
-      if(f == "") return(x$`Transcription factor`) # Case without family, we will get only the same object
-      return(unique(family[as.character(f)][[1]]$`Transcription factor`))
-    },.progress = "text")
-    #names(motif.relavent.TFs) <- tf.family$`Transcription factor`
-    names(motif.relavent.TFs) <- tf.family$Model
-    # Cleaning object
-    attr(motif.relavent.TFs,which="split_type") <- NULL
-    attr(motif.relavent.TFs,which="split_labels") <- NULL
-    save(motif.relavent.TFs, file = "motif.relevant.TFs.rda", compress = "xz")
-  }
-}
-```
-
-
-```{r}
-data("motif.relevant.TFs")
-motif.relavent.TFs[1:2]
-```
 
 ## Union.enhancer
 

@@ -24,7 +24,6 @@ ELMER analysis:
 \examples{
 data("Union.enhancer.hg38")
 data("Union.enhancer.hg19")
-data("motif.relavent.TFs")
 data("Probes.motif.hg38.EPIC")
 data("Probes.motif.hg19.EPIC")
 data("Probes.motif.hg38.450K")

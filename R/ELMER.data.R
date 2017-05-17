@@ -22,7 +22,6 @@
 #' @examples
 #' data("Union.enhancer.hg38")
 #' data("Union.enhancer.hg19")
-#' data("motif.relavent.TFs")
 #' data("Probes.motif.hg38.EPIC")
 #' data("Probes.motif.hg19.EPIC")
 #' data("Probes.motif.hg38.450K")
@@ -73,15 +72,6 @@ NULL
 #' @format A GRanges with 485577 elements
 #' @examples
 #' data("hm450.manifest")
-NULL
-
-#' A list with TF that might bind to each motif
-#' @docType data
-#' @keywords internal
-#' @name motif.relevant.TFs
-#' @format A List with 641 elements
-#' @examples
-#' data("motif.relevant.TFs")
 NULL
 
 #' A matrix with 1 if the probe (row) has a motif (column)
