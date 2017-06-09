@@ -13,8 +13,8 @@ output:
       collapsed: yes
     number_sections: true
   editor_options: 
-    chunk_output_type: inline
     
+    chunk_output_type: inline
 references:
 - id: ref1
   title: HOCOMOCO a comprehensive collection of human transcription factor binding sites models
@@ -278,44 +278,6 @@ data("Probes.motif.hg19.450K")
 as.data.frame(as.matrix(Probes.motif.hg19.450K[1:20,1:20]))
 ```
 
-
-## Union.enhancer
-
-Union.enhancer is a comprehensive list of genomic strong enhancers which comes 
-from a combination of enhancers from the Roadmap Epigenomics Mapping Consortium (REMC) 
-and the Encyclopedia of DNA Elements (ENCODE) Project, in which enhancers were 
-identified using ChromHMM for 98 tissues or cell lines. We used the union of 
-genomic elements labeled as EnhG1, EnhG2, EnhA1 or EnhA2 (representing intergenic 
-and intragenic active enhancers) in any of the 98 cell types, resulting in a total 
-of 389,967 non-overlapping enhancer regions. FANTOM5 enhancers (43,011) identified 
-by eRNAs for 400 distinct cell types were added to this list. This data is stored 
-as a GRanges object contains coordinates of this human comprehensive genomic enhancer set.
-It will be used in get.feature.probe in `r BiocStyle::Biocpkg("ELMER")` to identify the distal enhancer
-probes which are at least 2Kb awary from TSS regions and overlap with comprehensive 
-enhancers.
-
-```{r}
-data("Union.enhancer.hg19")
-Union.enhancer.hg19
-```
-
-The data used to create the Union.enhancer object was aligned 
-against the reference genome hg19. 
-In order to align it against hg38 we used liftOver.
-
-```{r, eval=FALSE, include=TRUE}
-data("Union.enhancer.hg19")
-file <- "http://hgdownload.cse.ucsc.edu/gbdb/hg19/liftOver/hg19ToHg38.over.chain.gz"
-downloader::download(file,basename(file))
-R.utils::gunzip(basename(file))
-chain <- import.chain("hg19ToHg38.over.chain")
-Union.enhancer.hg38 <- unlist(rtracklayer::liftOver(Union.enhancer.hg19, chain))
-Union.enhancer.hg38
-```
-```{r}
-data("Union.enhancer.hg38")
-Union.enhancer.hg38
-```
 
 # Session Information
 ******
