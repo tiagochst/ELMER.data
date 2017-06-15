@@ -1,6 +1,6 @@
 ---
 title: "ELMER.data: Supporting data for the ELMER package"
-author: "Lijing Yao, Ben Berman [aut], Peggy Farnham [aut]Hui Shen [ctb], Peter Laird [ctb], Simon Coetzee [ctb], Tiago Chedraoui Silva [ctb]"
+author: "Tiago Chedraoui Silva, Simon Coetzee, Lijing Yao, Peggy Farnham, Hui Shen, Peter Laird, Houtan Noushmehr, Ben Berman"
 date: "`r Sys.Date()`"
 output: 
   html_notebook:
@@ -91,7 +91,6 @@ infer upstream regulators. `r BiocStyle::Biocpkg("ELMER.data")` provide 3 necess
 
 1. Probes information: files with DNA methylation platforms metadata  retrieved from [http://zwdzwd.github.io/InfiniumAnnotation](http://zwdzwd.github.io/InfiniumAnnotation) [@zhou2016comprehensive].
 2. Probes.motif: motif occurences within $\pm 250bp$ of probe sites on HM450K/EPIC array aligned against hg19/hg38.
-3. Union.enhancer: A comprehensive list of genomic strong enhancers.
 
 ## Installing and loading ELMER.data
 
