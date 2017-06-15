@@ -1,16 +1,34 @@
 Package: ELMER.data
 Title: Data for the ELMER package
-Version: 1.7.0
+Version: 2.0.0
 Author: Lijing Yao
-Maintainer: Lijing Yao <lijingya@usc.edu>
-Description: Supporting data for the ELMER package. It includes
-        Union.TSS, Union.enhancer, Probe.motif, human.TF and
-        motif.relavent.TFs.
+    Tiago Chedraoui Silva,
+    Simon Coetzee,
+    Ben Berman
+Maintainer: Tiago Chedraoui Silva <tiagochst@usp.br>
+Description: 
+    Supporting data for the ELMER package. 
+    It includes:
+      - Probe.motif.hg38.EPIC
+      - Probe.motif.hg19.EPIC
+      - Probe.motif.hg38.450k
+      - Probe.motif.hg19.450k
+      - Union.enhancer.hg19
+      - Union.enhancer.hg38
+      - EPIC.manifest
+      - EPIC.manifest.hg38
+      - hm450.manifest
+      - hm450.manifest.hg38
+      - elmer.data.example
 License: GPL-3
 LazyData: true
-Depends: R (>= 3.2.0)
-Imports: GenomicRanges
-Suggests: BiocStyle, knitr
-biocViews: AssayDomainData
+Depends:
+    R (>= 3.2.0)
+Imports:
+    GenomicRanges
+Suggests:
+    BiocStyle,
+    knitr
+biocViews: AssayDomainData, TechnologyData, OrganismData
 VignetteBuilder: knitr
-NeedsCompilation: no
+RoxygenNote: 6.0.1
