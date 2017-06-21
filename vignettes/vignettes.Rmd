@@ -3,18 +3,16 @@ title: "ELMER.data: Supporting data for the ELMER package"
 author: "Tiago Chedraoui Silva, Simon Coetzee, Lijing Yao, Peggy Farnham, Hui Shen, Peter Laird, Houtan Noushmehr, Ben Berman"
 date: "`r Sys.Date()`"
 output: 
-  html_notebook:
-    highlight: tango
-    theme: flatly
-    toc: yes
-    fig_caption: yes     
-    toc_depth: 3
-    toc_float:
-      collapsed: yes
-    number_sections: true
-  editor_options: 
-    
-    chunk_output_type: inline
+    BiocStyle::html_document:
+      highlight: tango
+      toc: yes
+      fig_caption: yes     
+      toc_depth: 3
+      toc_float:
+        collapsed: yes
+      number_sections: true
+    editor_options: 
+      chunk_output_type: inline
 references:
 - id: ref1
   title: HOCOMOCO a comprehensive collection of human transcription factor binding sites models
@@ -77,6 +75,8 @@ editor_options:
 
 ```{r, echo = FALSE,hide=TRUE, message=FALSE,warning=FALSE}
 devtools::load_all(".")
+library(DT)
+library(dplyr)
 ```
 
 # Introduction
@@ -127,13 +127,13 @@ for(plat in c("450K","EPIC")) {
 ```
 ```{r, message=FALSE}
 data("EPIC.manifest")
-as.data.frame(EPIC.manifest)
+as.data.frame(EPIC.manifest)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
 data("EPIC.manifest.hg38")
-as.data.frame(EPIC.manifest.hg38)
+as.data.frame(EPIC.manifest.hg38)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
 data("hm450.manifest.hg38")
-as.data.frame(hm450.manifest.hg38)
+as.data.frame(hm450.manifest.hg38)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
 data("hm450.manifest")
-as.data.frame(hm450.manifest)
+as.data.frame(hm450.manifest)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
 ```
 
 ## Probes.motif
@@ -274,7 +274,8 @@ save(Probes.motif.hg38.EPIC, file = "Probes.motif.hg38.EPIC.rda", compress = "xz
 
 ```{r}
 data("Probes.motif.hg19.450K")
-as.data.frame(as.matrix(Probes.motif.hg19.450K[1:20,1:20]))
+as.data.frame(as.matrix(Probes.motif.hg19.450K[1:20,1:20])) %>% 
+  datatable(options = list(scrollX = TRUE,pageLength = 5)) 
 ```
 
 
