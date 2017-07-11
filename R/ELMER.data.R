@@ -9,7 +9,6 @@
 #' ELMER analysis:
 #' \itemize{
 #'   \item Probes.motif: motif occurences within -/+250bp of probe sites on HM450K/EPIC array aligned against hg19/hg38.
-#'   \item Union.enhancer: A comprehensive list of genomic strong enhancers.
 #'   \item DNA methylation platform manifest: from http://zwdzwd.github.io/InfiniumAnnotation
 #'   \item TF.family TFs family from TFClass  
 #'   \item TF.subfamily TFs subfamily from TFClass  
@@ -21,8 +20,6 @@
 #' @name ELMER.data
 #' @keywords utilities
 #' @examples
-#' data("Union.enhancer.hg38")
-#' data("Union.enhancer.hg19")
 #' data("Probes.motif.hg38.EPIC")
 #' data("Probes.motif.hg19.EPIC")
 #' data("Probes.motif.hg38.450K")
@@ -156,25 +153,6 @@ NULL
 #' @format A matrix with  466007 rows and 640 columns
 #' @examples
 #' data("Probes.motif.hg38.450K")
-NULL
-
-
-#' A GRanges with enhancer regions
-#' @docType data
-#' @keywords internal
-#' @name Union.enhancer.hg19
-#' @format A GRRanges with 571084 elements
-#' @examples
-#' data("Union.enhancer.hg19")
-NULL
-
-#' A GRanges with enhancer regions
-#' @docType data
-#' @keywords internal
-#' @name Union.enhancer.hg38
-#' @format A GRRanges with 571084 elements
-#' @examples
-#' data("Union.enhancer.hg38")
 NULL
 
 
