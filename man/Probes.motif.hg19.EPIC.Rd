@@ -6,7 +6,7 @@
 \title{A matrix with 1 if the probe (row) has a motif (column)}
 \format{A matrix with  838881 rows and 640 columns}
 \description{
-It was generated using HOMER with a p-value < 1e–4 
+It was generated using HOMER with a p-value < 1e-4 
 to scan a +/- 250bp region around each probe using HOmo sapiens 
 COmprehensive MOdel COllection [http://hocomoco.autosome.ru/](HOCOMOCO) v10  position
 weight matrices (PWMs). HOCOMOCO offers 640 PMWs each has a quality rating from A to D where 
