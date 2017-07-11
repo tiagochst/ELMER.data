@@ -14,7 +14,6 @@ infer upstream regulators. ELMER.data provide 2 necessary data for
 ELMER analysis:
 \itemize{
   \item Probes.motif: motif occurences within -/+250bp of probe sites on HM450K/EPIC array aligned against hg19/hg38.
-  \item Union.enhancer: A comprehensive list of genomic strong enhancers.
   \item DNA methylation platform manifest: from http://zwdzwd.github.io/InfiniumAnnotation
   \item TF.family TFs family from TFClass  
   \item TF.subfamily TFs subfamily from TFClass  
@@ -23,8 +22,6 @@ ELMER analysis:
     follwing command: \code{browseVignettes("ELMER.data")}
 }
 \examples{
-data("Union.enhancer.hg38")
-data("Union.enhancer.hg19")
 data("Probes.motif.hg38.EPIC")
 data("Probes.motif.hg19.EPIC")
 data("Probes.motif.hg38.450K")
