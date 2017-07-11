@@ -198,7 +198,7 @@ NULL
 #' This data is used in the examples of ELMER package
 #' @docType data
 #' @keywords internal
-#' @name data
+#' @name mae.promoter
 #' @format A MultiAssayExperiment for 234 Samples (8 normal samples, 226 Primary solid tumor)
 #' @examples
 #' data("elmer.data.example.promoter")

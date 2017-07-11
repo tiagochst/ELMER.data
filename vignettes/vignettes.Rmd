@@ -74,7 +74,7 @@ editor_options:
 ---   
 
 ```{r, echo = FALSE,hide=TRUE, message=FALSE,warning=FALSE}
-devtools::load_all(".")
+library(ELEMR.data)
 library(DT)
 library(dplyr)
 ```
