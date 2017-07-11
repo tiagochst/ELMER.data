@@ -28,7 +28,10 @@ Imports:
     GenomicRanges
 Suggests:
     BiocStyle,
-    knitr
+    knitr,
+    dplyr,
+    devtools,
+    DT
 biocViews: AssayDomainData, TechnologyData, OrganismData
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
