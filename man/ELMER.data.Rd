@@ -16,7 +16,8 @@ ELMER analysis:
   \item Probes.motif: motif occurences within -/+250bp of probe sites on HM450K/EPIC array aligned against hg19/hg38.
   \item Union.enhancer: A comprehensive list of genomic strong enhancers.
   \item DNA methylation platform manifest: from http://zwdzwd.github.io/InfiniumAnnotation
-  \item motif.relavent.TFs TFs family from TFClass  
+  \item TF.family TFs family from TFClass  
+  \item TF.subfamily TFs subfamily from TFClass  
 }
     For more information how to create these objects please read the vignette of this package with the
     follwing command: \code{browseVignettes("ELMER.data")}
@@ -32,7 +33,6 @@ data("EPIC.manifest")
 data("EPIC.manifest.hg38")
 data("hm450.manifest")
 data("hm450.manifest.hg38")
-data("motif.relevant.TFs")
 data("elmer.data.example")
 }
 \keyword{utilities}

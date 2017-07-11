@@ -9,9 +9,7 @@ DNA methylation data: 101 probes from platform 450K
 Gene Expression data: 1026 genes
 for 234 samples from TCGA-LUSC.
 This data is used in the examples of ELMER package}
-\format{A MultiAssayExperiment for 234 Samples (8 normal samples, 226 Primary solid tumor)
-#' @examples
-data("elmer.data.example")}
+\format{A MultiAssayExperiment for 234 Samples (8 normal samples, 226 Primary solid tumor)}
 \description{
 A MultiAssayExperiment containing
 DNA methylation data: 101 probes from platform 450K 
@@ -24,5 +22,9 @@ DNA methylation data: 16 promoter probes from platform 450K
 Gene Expression data: 3808 genes
 for 234 samples from TCGA-LUSC.
 This data is used in the examples of ELMER package
+}
+\examples{
+data("elmer.data.example")
+data("elmer.data.example.promoter")
 }
 \keyword{internal}

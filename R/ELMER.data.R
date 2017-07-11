@@ -11,7 +11,8 @@
 #'   \item Probes.motif: motif occurences within -/+250bp of probe sites on HM450K/EPIC array aligned against hg19/hg38.
 #'   \item Union.enhancer: A comprehensive list of genomic strong enhancers.
 #'   \item DNA methylation platform manifest: from http://zwdzwd.github.io/InfiniumAnnotation
-#'   \item motif.relavent.TFs TFs family from TFClass  
+#'   \item TF.family TFs family from TFClass  
+#'   \item TF.subfamily TFs subfamily from TFClass  
 #' }
 #'     For more information how to create these objects please read the vignette of this package with the
 #'     follwing command: \code{browseVignettes("ELMER.data")}
@@ -30,7 +31,6 @@
 #' data("EPIC.manifest.hg38")
 #' data("hm450.manifest")
 #' data("hm450.manifest.hg38")
-#' data("motif.relevant.TFs")
 #' data("elmer.data.example")
 NULL
 
@@ -187,7 +187,7 @@ NULL
 #' @keywords internal
 #' @name data
 #' @format A MultiAssayExperiment for 234 Samples (8 normal samples, 226 Primary solid tumor)
-#' #' @examples
+#' @examples
 #' data("elmer.data.example")
 NULL
 
@@ -200,7 +200,7 @@ NULL
 #' @keywords internal
 #' @name data
 #' @format A MultiAssayExperiment for 234 Samples (8 normal samples, 226 Primary solid tumor)
-#' #' @examples
+#' @examples
 #' data("elmer.data.example.promoter")
 NULL
 
@@ -232,3 +232,20 @@ NULL
 #' @format A matrix with 1968 rows (TFs) and 12 columns (motifs)
 NULL
 
+#' A list of 641 motifs with TF families (with similar bidings) from TFClass
+#' Created with the following function from ELMER pacakge 
+#' TF.family <-  createMotifRelevantTfs()
+#' @docType data
+#' @keywords internal
+#' @name TF.family
+#' @format A list of 641 motifs with TF families (with similar bidings)
+NULL
+
+#' A list of 641 motifs with TF subfamilies (with similar bidings) from TFClass
+#' Created with the following function from ELMER pacakge 
+#' TF.family <-  createMotifRelevantTfs("subfamily")
+#' @docType data
+#' @keywords internal
+#' @name TF.subfamily
+#' @format A list of 641 motifs with TF subfamilies (with similar bidings)
+NULL
