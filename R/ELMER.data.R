@@ -73,15 +73,15 @@ NULL
 
 #' A matrix with 1 if the probe (row) has a motif (column)
 #' @description 
-#' It was generated using HOMER with a p-value < 1e–4 
+#' It was generated using HOMER with a p-value < 1e-4 
 #' to scan a +/- 250bp region around each probe using HOmo sapiens 
 #' COmprehensive MOdel COllection [http://hocomoco.autosome.ru/](HOCOMOCO) v10  position
 #' weight matrices (PWMs). HOCOMOCO offers 640 PMWs each has a quality rating from A to D where 
 #' A represents motifs with the highest confidence, and D motifs only weakly describe the pattern with a 
 #' limited applications for quantitative analyses. By default only quality A and B will be used for the 
 #' Motif enrichment analysis, but the minimun quality score can be seleected by the user.
-#' (Addtional information [http://hocomoco.autosome.ru/help#description_quality_score](Source)  
-#' [http://nar.oxfordjournals.org/content/44/D1/D116.full#sec-8](More information)). 
+#' (Addtional information [http://hocomoco.autosome.ru/help](Source)  
+#' [http://nar.oxfordjournals.org/content/44/D1/D116.full](More information)). 
 #' The DNA methylation information was retrieved from: http://zwdzwd.github.io/InfiniumAnnotation
 #' For more information check the vignette.
 #' @docType data
@@ -94,15 +94,15 @@ NULL
 
 #' A matrix with 1 if the probe (row) has a motif (column)
 #' @description 
-#' It was generated using HOMER with a p-value < 1e–4 
+#' It was generated using HOMER with a p-value < 1e-4 
 #' to scan a +/- 250bp region around each probe using HOmo sapiens 
 #' COmprehensive MOdel COllection [http://hocomoco.autosome.ru/](HOCOMOCO) v10  position
 #' weight matrices (PWMs). HOCOMOCO offers 640 PMWs each has a quality rating from A to D where 
 #' A represents motifs with the highest confidence, and D motifs only weakly describe the pattern with a 
 #' limited applications for quantitative analyses. By default only quality A and B will be used for the 
 #' Motif enrichment analysis, but the minimun quality score can be seleected by the user.
-#' (Addtional information [http://hocomoco.autosome.ru/help#description_quality_score](Source)  
-#' [http://nar.oxfordjournals.org/content/44/D1/D116.full#sec-8](More information)). 
+#' (Addtional information [http://hocomoco.autosome.ru/help](Source)  
+#' [http://nar.oxfordjournals.org/content/44/D1/D116.full](More information)). 
 #' The DNA methylation information was retrieved from: http://zwdzwd.github.io/InfiniumAnnotation
 #' For more information check the vignette.
 #' @docType data
@@ -115,15 +115,15 @@ NULL
 
 #' A matrix with 1 if the probe (row) has a motif (column)
 #' @description 
-#' It was generated using HOMER with a p-value < 1e–4 
+#' It was generated using HOMER with a p-value < 1e-4 
 #' to scan a +/- 250bp region around each probe using HOmo sapiens 
 #' COmprehensive MOdel COllection [http://hocomoco.autosome.ru/](HOCOMOCO) v10  position
 #' weight matrices (PWMs). HOCOMOCO offers 640 PMWs each has a quality rating from A to D where 
 #' A represents motifs with the highest confidence, and D motifs only weakly describe the pattern with a 
 #' limited applications for quantitative analyses. By default only quality A and B will be used for the 
-#' Motif enrichment analysis, but the minimun quality score can be seleected by the user.
-#' (Addtional information [http://hocomoco.autosome.ru/help#description_quality_score](Source)  
-#' [http://nar.oxfordjournals.org/content/44/D1/D116.full#sec-8](More information)). 
+#' Motif enrichment analysis, but the minimun quality score can be selected by the user.
+#' (Addtional information [http://hocomoco.autosome.ru/help](Source)  
+#' [http://nar.oxfordjournals.org/content/44/D1/D116.full](More information)). 
 #' The DNA methylation information was retrieved from: http://zwdzwd.github.io/InfiniumAnnotation
 #' For more information check the vignette.
 #' @docType data
@@ -136,15 +136,15 @@ NULL
 
 #' A matrix with 1 if the probe (row) has a motif (column)
 #' @description 
-#' It was generated using HOMER with a p-value < 1e–4 
+#' It was generated using HOMER with a p-value < 1e-4 
 #' to scan a +/- 250bp region around each probe using HOmo sapiens 
 #' COmprehensive MOdel COllection [http://hocomoco.autosome.ru/](HOCOMOCO) v10  position
 #' weight matrices (PWMs). HOCOMOCO offers 640 PMWs each has a quality rating from A to D where 
 #' A represents motifs with the highest confidence, and D motifs only weakly describe the pattern with a 
 #' limited applications for quantitative analyses. By default only quality A and B will be used for the 
-#' Motif enrichment analysis, but the minimun quality score can be seleected by the user.
-#' (Addtional information [http://hocomoco.autosome.ru/help#description_quality_score](Source)  
-#' [http://nar.oxfordjournals.org/content/44/D1/D116.full#sec-8](More information)). 
+#' Motif enrichment analysis, but the minimun quality score can be selected by the user.
+#' (Addtional information [http://hocomoco.autosome.ru/help](Source)  
+#' [http://nar.oxfordjournals.org/content/44/D1/D116.full](More information)). 
 #' The DNA methylation information was retrieved from: http://zwdzwd.github.io/InfiniumAnnotation
 #' For more information check the vignette.
 #' @docType data
