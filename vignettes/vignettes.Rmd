@@ -206,17 +206,15 @@ for(plat in c("450K","EPIC")){
         gr <- getInfiniumAnnotation(plat = plat,genome =  gen)
         
         # This will remove masked probes. They have poor quality and might be arbitrarily positioned (Wanding Zhou)
-        print(table(gr$MASK.general))
         gr <- gr[!gr$MASK.general]
-        print(table(gr$MASK.general))
-        
+
         df <- data.frame(seqnames=seqnames(gr),
                          starts=as.integer(start(gr)),
                          ends=end(gr),
                          names=names(gr),
                          scores=c(rep(".", length(gr))),
                          strands=strand(gr))
-        step <- 50000 # nb of lines in each file 50K was selected to not explode RAM
+        step <- 10000 # nb of lines in each file. 10K was selected to not explode RAM
         n <- nrow(df)
         for(j in 0:floor(n/step)){
           # STEP 2
@@ -225,8 +223,8 @@ for(plat in c("450K","EPIC")){
             end <- ifelse(((j + 1) * step) > n, n,((j + 1) * step))
             write.table(df[((j * step) + 1):end,], file = file.aux, col.names = F, quote = F,row.names = F,sep = "\t")
             
-            # STEP 3
-            cmd <- paste("source ~/.bash_rc; annotatePeaks.pl" ,file.aux, gen, "-m", basename(TFBS.motif), "-size 500 -cpu 12 -mscore >", gsub(".bed",".txt",file.aux))
+            # STEP 3 use -mscore to get scores
+            cmd <- paste("source ~/.bash_rc; annotatePeaks.pl" ,file.aux, gen, "-m", basename(TFBS.motif), "-size 500 -cpu 12 >", gsub(".bed",".txt",file.aux))
             system(cmd)
           }
         }
@@ -250,26 +248,43 @@ for(plat in c("450K","EPIC")){
 
 # This code will read the table with the motifs, save it as a sparce matrix
 # and save all as a .rda that will be placed in ELMER.data
-for(plat in c("450K","EPIC")){
-    for(gen in c("hg19","hg38")){
-        file <- paste0(plat,gen,".txt")
-        motifs <- readr::read_tsv(file)
-        # From 1 to 21 we have annotations then we have 640 motifs
-        matrix <- Matrix::Matrix(0, nrow = nrow(motifs), ncol = 640,sparse = TRUE)
-        colnames(matrix) <- gsub(" Distance From Peak\\(sequence,strand,conservation\\)","",colnames(motifs)[-c(1:21)])
-        rownames(matrix) <- motifs$PeakID
-        matrix[!is.na(motifs[,-c(1:21)])] <- 1
-        matrix <- as(matrix, "nsparseMatrix")
-        assign(paste0("Probes.motif.",gen,".",plat),matrix) # For each probe that there is a bind to the motif, we will add as 1 in the matrix. (Are hg38, hg19,450k,epic matrices equal?)
-        rm(matrix)
-        rm(motifs)
-        gc()
-    }
+getMatrix <- function(filename) {
+  motifs <- readr::read_tsv(file)
+  # From 1 to 21 we have annotations then we have 640 motifs
+  matrix <- Matrix::Matrix(0, nrow = nrow(motifs), ncol = 640,sparse = TRUE)
+  colnames(matrix) <- gsub(" Distance From Peak\\(sequence,strand,conservation\\)","",colnames(motifs)[-c(1:21)])
+  rownames(matrix) <- motifs$PeakID
+  matrix[!is.na(motifs[,-c(1:21)])] <- 1
+  matrix <- as(matrix, "nsparseMatrix")
+  return(matrix)
 }
-save(Probes.motif.hg19.450K, file = "Probes.motif.hg19.450K.rda", compress = "xz")
-save(Probes.motif.hg38.450K, file = "Probes.motif.hg38.450K.rda", compress = "xz")
-save(Probes.motif.hg19.EPIC, file = "Probes.motif.hg19.EPIC.rda", compress = "xz")
-save(Probes.motif.hg38.EPIC, file = "Probes.motif.hg38.EPIC.rda", compress = "xz")
+for(plat in c("EPIC", "450K")){
+  for(gen in c("hg19","hg38")){
+    file <- paste0(plat,gen,".txt")
+    if(file == "450Khg19.txt"){
+      Probes.motif.hg19.450K <- getMatrix(file)
+      save(Probes.motif.hg19.450K, file = "Probes.motif.hg19.450K.rda", compress = "xz")
+      rm(Probes.motif.hg19.450K)
+    } 
+    if(file == "450Khg38.txt"){
+      Probes.motif.hg38.450K <- getMatrix(file)
+      save(Probes.motif.hg38.450K, file = "Probes.motif.hg38.450K.rda", compress = "xz")
+      rm(Probes.motif.hg38.450K)
+    }
+    
+    if(file == "EPIChg19.txt"){
+      Probes.motif.hg19.EPIC <- getMatrix(file)
+      save(Probes.motif.hg19.EPIC, file = "Probes.motif.hg19.EPIC.rda", compress = "xz")
+      rm(Probes.motif.hg19.EPIC)
+    }
+    
+    if(file == "EPIChg38.txt"){
+      Probes.motif.hg38.EPIC <- getMatrix(file)
+      save(Probes.motif.hg38.EPIC, file = "Probes.motif.hg38.EPIC.rda", compress = "xz")
+      rm(Probes.motif.hg38.EPIC)
+    }
+  }
+}
 ```
 
 ```{r}
