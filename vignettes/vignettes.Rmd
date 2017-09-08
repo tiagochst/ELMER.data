@@ -226,7 +226,7 @@ for(plat in c("450K","EPIC")){
             write.table(df[((j * step) + 1):end,], file = file.aux, col.names = F, quote = F,row.names = F,sep = "\t")
             
             # STEP 3
-            cmd <- paste("source ~/.bash_rc; annotatePeaks.pl" ,file.aux, gen, "-m", basename(TFBS.motif), "-size 500 -cpu 12 >", gsub(".bed",".txt",file.aux))
+            cmd <- paste("source ~/.bash_rc; annotatePeaks.pl" ,file.aux, gen, "-m", basename(TFBS.motif), "-size 500 -cpu 12 -mscore >", gsub(".bed",".txt",file.aux))
             system(cmd)
           }
         }
@@ -278,6 +278,14 @@ as.data.frame(as.matrix(Probes.motif.hg19.450K[1:20,1:20])) %>%
   datatable(options = list(scrollX = TRUE,pageLength = 5)) 
 ```
 
+<div class="panel panel-info">
+<div class="panel-heading">Homer versions</div>
+<div class="panel-body">
+- Software: v4.9.1
+- Genome hg19: v5.10
+- Genome hg38: v5.10
+</div>
+</div>
 
 # Session Information
 ******
