@@ -140,7 +140,7 @@ as.data.frame(hm450.manifest)[1:5,] %>% datatable(options = list(scrollX = TRUE,
 
 Probes.motif provides information for motif occurences within$\pm 250bp$ of probe 
 sites on HM450K/EPIC array. HOMER [@heinz2010simple] was used with a p-value < 0.0001 to scan a $\pm 250bp$ 
-region around each probe on HM450K/EPIC using HOCOMOCO V10 motif position weight 
+region around each probe on HM450K/EPIC using HOCOMOCO V11 motif position weight 
 matrices (PWMs) which provides transcription factor (TF) binding models for more than 600 human TFs.
 This data set is used in get.enriched.motif function in `r BiocStyle::Biocpkg("ELMER")` to calculate 
 Odds Ratio of motif enrichments for a given set of probes. This data is storaged 
