@@ -136,6 +136,58 @@ data("hm450.manifest")
 as.data.frame(hm450.manifest)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
 ```
 
+## TF family and subfamily classifications
+
+ELMER uses the TFClass [@wingender2014tfclass], a classification of eukaryotic transcription factors based on the characteristics of their DNA-binding domains, to identify which are the TF that might be binding to the same region. For example, if a FOXA1 motif is found in a region, there is FOXA2 would also be able to bind to that region. For that ELMER uses two classifications, Family and sub-family. TFClass schema is shown below.
+
+TFClass schema is below:
+
+| Level | Rank denomination | Definition                                     | Example                                                       |
+|-------|-------------------|------------------------------------------------|---------------------------------------------------------------|
+| 1     | Superclass        | General topology of the DNA-binding domain     | Zinc-coordinating DNA-binding domains (Superclass 2)          |
+| 2     | Class             | Structural blueprint of the DNA-binding domain | Nuclear receptors with C4 zinc fingers (Class 2.1)            |
+| 3     | Family            | Sequence & functional similarity               | Thyroid hormone receptor-related factors (NR1) (Family 2.1.2) |
+| 4     | Subfamily         | Sequence-based subgroupings                    | Retinoic acid receptors (NR1B) (Subfamily 2.1.2.1)            |
+| 5     | Genus             | Transcription factor gene                      | RAR-α (Genus 2.1.2.1.1)                                       |
+| 4     | Species           | TF polypeptide                                 | RAR-α1 (Species 2.1.2.1.1.1)       
+
+The following code was used to create the objects:
+
+```{r, eval=FALSE, include=TRUE}
+library(xml2)
+library(httr)
+library(dplyr)
+library(rvest)
+createMotifRelevantTfs <- function(classification = "family"){
+  message("Accessing hocomoco to get last version of TFs ", classification)
+  file <- paste0(classification,".motif.relevant.TFs.rda")
+   
+    # Download from http://hocomoco.autosome.ru/human/mono
+    tf.family <- "http://hocomoco11.autosome.ru/human/mono?full=true" %>% read_html()  %>%  html_table()
+    tf.family <- tf.family[[1]]
+    # Split TF for each family, this will help us map for each motif which are the some ones in the family
+    # basicaly: for a TF get its family then get all TF in that family
+    col <- ifelse(classification == "family", "TF family","TF subfamily")
+    family <- split(tf.family,f = tf.family[[col]])
+    
+    motif.relevant.TFs <- plyr::alply(tf.family,1, function(x){  
+      f <- x[[col]]
+      if(f == "") return(x$`Transcription factor`) # Case without family, we will get only the same object
+      return(unique(family[as.character(f)][[1]]$`Transcription factor`))
+    },.progress = "text")
+    #names(motif.relevant.TFs) <- tf.family$`Transcription factor`
+    names(motif.relevant.TFs) <- tf.family$Model
+    # Cleaning object
+    attr(motif.relevant.TFs,which="split_type") <- NULL
+    attr(motif.relevant.TFs,which="split_labels") <- NULL
+  return(motif.relevant.TFs)
+}
+TF.family <- createMotifRelevantTfs("family")
+TF.subfamily <- createMotifRelevantTfs("subfamily")
+save(TF.family,file = "TF.family.rda")
+save(TF.subfamily,file = "TF.subfamily.rda")
+```
+
 ## Probes.motif
 
 Probes.motif provides information for motif occurences within$\pm 250bp$ of probe 
