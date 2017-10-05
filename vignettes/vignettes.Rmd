@@ -188,6 +188,13 @@ save(TF.family,file = "TF.family.rda", compress = "xz")
 save(TF.subfamily,file = "TF.subfamily.rda", compress = "xz")
 ```
 
+```{r, eval=FALSE, include=TRUE}
+hocomoco.table <- "http://hocomoco11.autosome.ru/human/mono?full=true" %>% read_html()  %>%  html_table()
+hocomoco.table <- hocomoco.table[[1]]
+save(hocomoco.table,file = "data/hocomoco.table.rda", compress = "xz")
+```
+
+
 ## Probes.motif
 
 Probes.motif provides information for motif occurences within$\pm 250bp$ of probe 
