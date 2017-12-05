@@ -1,6 +1,6 @@
 Package: ELMER.data
 Title: Data for the ELMER package
-Version: 2.0.7
+Version: 2.0.8
 Author: Lijing Yao
     Tiago Chedraoui Silva,
     Simon Coetzee,
@@ -21,7 +21,7 @@ Description:
       - hm450.manifest.hg38
       - elmer.data.example
 License: GPL-3
-LazyData: true
+LazyData: false
 Depends:
     R (>= 3.2.0)
 Imports:
