@@ -18,6 +18,7 @@
 #'
 #' @docType package
 #' @name ELMER.data
+#' @exportPattern ^[[:alpha:]]+
 #' @keywords utilities
 #' @examples
 #' data("Probes.motif.hg38.EPIC")

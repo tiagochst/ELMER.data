@@ -1,25 +1,29 @@
 Package: ELMER.data
 Title: Data for the ELMER package
-Version: 2.3.1
+Version: 2.3.2
 Author: Lijing Yao
-    Tiago Chedraoui Silva,
-    Simon Coetzee,
-    Ben Berman
+        Tiago Chedraoui Silva,
+        Simon Coetzee,
+        Ben Berman
 Maintainer: Tiago Chedraoui Silva <tiagochst@usp.br>
 Description: 
     Supporting data for the ELMER package. 
     It includes:
-      - Probe.motif.hg38.EPIC
-      - Probe.motif.hg19.EPIC
-      - Probe.motif.hg38.450k
-      - Probe.motif.hg19.450k
-      - Union.enhancer.hg19
-      - Union.enhancer.hg38
-      - EPIC.manifest
-      - EPIC.manifest.hg38
-      - hm450.manifest
-      - hm450.manifest.hg38
-      - elmer.data.example
+     - elmer.data.example.promoter: mae.promoter
+     - elmer.data.example: data
+     - EPIC.manifest.hg38
+     - EPIC.manifest
+     - hm450.manifest.hg38
+     - hm450.manifest
+     - hocomoco.table
+     - LUSC_meth_refined: Meth
+     - LUSC_RNA_refined: GeneExp
+     - Probes.motif.hg19.450K
+     - Probes.motif.hg19.EPIC
+     - Probes.motif.hg38.450K
+     - Probes.motif.hg38.EPIC
+     - TF.family
+     - TF.subfamily
 License: GPL-3
 LazyData: false
 Depends:
