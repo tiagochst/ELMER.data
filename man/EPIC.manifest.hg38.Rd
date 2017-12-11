@@ -12,6 +12,8 @@ EPIC.manifest.hg38
 A GRanges containing hg38 annotation with suggested overall masking for EPIC platform
 }
 \examples{
+\dontrun{
 data("EPIC.manifest.hg38")
+}
 }
 \keyword{internal}

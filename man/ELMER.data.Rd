@@ -18,8 +18,8 @@ ELMER analysis:
   \item TF.family TFs family from TFClass  
   \item TF.subfamily TFs subfamily from TFClass  
 }
-    For more information how to create these objects please read the vignette of this package with the
-    follwing command: \code{browseVignettes("ELMER.data")}
+For more information how to create these objects please read the vignette of this package with the
+follwing command: \code{browseVignettes("ELMER.data")}
 }
 \examples{
 # Please see the datasets

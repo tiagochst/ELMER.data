@@ -12,6 +12,8 @@ EPIC.manifest
 A GRanges containing hg19 annotation with suggested overall masking for EPIC platform
 }
 \examples{
+\dontrun{
 data("EPIC.manifest")
+}
 }
 \keyword{internal}

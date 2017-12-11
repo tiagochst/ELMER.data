@@ -1,4 +1,3 @@
-
 #' @title Data for ELMER package
 #' @description
 #' ELMER is package using DNA methylation to 
@@ -13,9 +12,8 @@
 #'   \item TF.family TFs family from TFClass  
 #'   \item TF.subfamily TFs subfamily from TFClass  
 #' }
-#'     For more information how to create these objects please read the vignette of this package with the
-#'     follwing command: \code{browseVignettes("ELMER.data")}
-#'
+#' For more information how to create these objects please read the vignette of this package with the
+#' follwing command: \code{browseVignettes("ELMER.data")}
 #' @docType package
 #' @seealso \code{\link[ELMER.data]{EPIC.manifest}}, \code{\link[ELMER.data]{EPIC.manifest.hg38}}, 
 #' \code{\link[imudata]{hm450.manifest}}, \code{\link[ELMER.data]{hm450.manifest.hg38}}, 
@@ -36,7 +34,9 @@ NULL
 #' @import GenomicRanges
 #' @format A GRanges with 866895 elements
 #' @examples
+#' \dontrun{
 #' data("EPIC.manifest")
+#' }
 "EPIC.manifest"
 
 #' A GRanges containing hg38 annotation with suggested overall masking for EPIC platform
@@ -46,7 +46,9 @@ NULL
 #' @import GenomicRanges
 #' @format A GRanges with 866895 elements
 #' @examples
+#' \dontrun{
 #' data("EPIC.manifest.hg38")
+#' }
 "EPIC.manifest.hg38"
 
 #' A GRanges containing hg38 annotation with suggested overall masking for hm450 platform
@@ -56,7 +58,9 @@ NULL
 #' @import GenomicRanges
 #' @format A GRanges with 485577 elements
 #' @examples
+#' \dontrun{
 #' data("hm450.manifest.hg38")
+#' }
 "hm450.manifest.hg38"
 
 #' A GRanges containing hg19 annotation with suggested overall masking for hm450 platform
@@ -230,3 +234,13 @@ NULL
 #' @name TF.subfamily
 #' @format A list of 641 motifs with TF subfamilies (with similar bidings)
 "TF.subfamily"
+
+
+#' Table parsed from hocomoco v11
+#' @docType data
+#' @keywords internal
+#' @name hocomoco.table
+#' @format A dataframe with 771 rows (motifs) and 20 columns
+"hocomoco.table"
+
+
