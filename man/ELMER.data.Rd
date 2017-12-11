@@ -26,9 +26,9 @@ follwing command: \code{browseVignettes("ELMER.data")}
 }
 \seealso{
 \code{\link[ELMER.data]{EPIC.manifest}}, \code{\link[ELMER.data]{EPIC.manifest.hg38}}, 
-\code{\link[imudata]{hm450.manifest}}, \code{\link[ELMER.data]{hm450.manifest.hg38}}, 
+\code{\link[ELMER.data]{hm450.manifest}}, \code{\link[ELMER.data]{hm450.manifest.hg38}}, 
 \code{\link[ELMER.data]{Probes.motif.hg19.450K}}, \code{\link[ELMER.data]{Probes.motif.hg38.450K}}, 
 \code{\link[ELMER.data]{Probes.motif.hg38.EPIC}}, \code{\link[ELMER.data]{Probes.motif.hg19.EPIC}}, 
-\code{\link[ELMER.data]{TF.subfamily}}, \code{\link[ELMER.data]{TF.family}}, and \code{\link[ELMER.data]{TF.meth.cor}}
+\code{\link[ELMER.data]{TF.subfamily}}, \code{\link[ELMER.data]{TF.family}}, and \code{\link[ELMER.data]{hocomoco.table}}
 }
 \keyword{utilities}
