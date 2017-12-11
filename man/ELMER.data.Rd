@@ -10,7 +10,7 @@ ELMER is package using DNA methylation to
 identify enhancers, and correlates enhancer state with expression of nearby genes 
 to identify one or more transcriptional targets. Transcription factor (TF) binding 
 site analysis of enhancers is coupled with expression analysis of all TFs to 
-infer upstream regulators. ELMER.data provide 2 necessary data for 
+infer upstream regulators. ELMER.data provide the necessary data for 
 ELMER analysis:
 \itemize{
   \item Probes.motif: motif occurences within -/+250bp of probe sites on HM450K/EPIC array aligned against hg19/hg38.
