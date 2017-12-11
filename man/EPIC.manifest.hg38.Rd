@@ -5,6 +5,9 @@
 \alias{EPIC.manifest.hg38}
 \title{A GRanges containing hg38 annotation with suggested overall masking for EPIC platform}
 \format{A GRanges with 866895 elements}
+\usage{
+EPIC.manifest.hg38
+}
 \description{
 A GRanges containing hg38 annotation with suggested overall masking for EPIC platform
 }

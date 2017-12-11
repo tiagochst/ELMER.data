@@ -5,6 +5,9 @@
 \alias{Probes.motif.hg38.450K}
 \title{A matrix with 1 if the probe (row) has a motif (column)}
 \format{A matrix with  466007 rows and 640 columns}
+\usage{
+Probes.motif.hg38.450K
+}
 \description{
 It was generated using HOMER with a p-value < 1e-4 
 to scan a +/- 250bp region around each probe using HOmo sapiens 
@@ -19,6 +22,8 @@ The DNA methylation information was retrieved from: http://zwdzwd.github.io/Infi
 For more information check the vignette.
 }
 \examples{
+\dontrun{
 data("Probes.motif.hg38.450K")
+}
 }
 \keyword{internal}

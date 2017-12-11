@@ -5,6 +5,9 @@
 \alias{EPIC.manifest}
 \title{A GRanges containing hg19 annotation with suggested overall masking for EPIC platform}
 \format{A GRanges with 866895 elements}
+\usage{
+EPIC.manifest
+}
 \description{
 A GRanges containing hg19 annotation with suggested overall masking for EPIC platform
 }

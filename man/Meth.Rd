@@ -7,6 +7,9 @@
 DNA methylation data: 1728 probes
 This data is used in the examples of ELMER package}
 \format{A MultiAssayExperiment for 268 Samples  and 1728 probes}
+\usage{
+Meth
+}
 \description{
 A matrix containing DNA methylation beta-values from TCGA
 DNA methylation data: 1728 probes

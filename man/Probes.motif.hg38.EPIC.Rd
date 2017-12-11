@@ -5,6 +5,9 @@
 \alias{Probes.motif.hg38.EPIC}
 \title{A matrix with 1 if the probe (row) has a motif (column)}
 \format{A matrix with  838881 rows and 640 columns}
+\usage{
+Probes.motif.hg38.EPIC
+}
 \description{
 It was generated using HOMER with a p-value < 1e-4 
 to scan a +/- 250bp region around each probe using HOmo sapiens 
@@ -19,6 +22,8 @@ The DNA methylation information was retrieved from: http://zwdzwd.github.io/Infi
 For more information check the vignette.
 }
 \examples{
-data("Probes.motif.hg38.EPIC")
+\dontrun{
+  data("Probes.motif.hg38.EPIC")
+}
 }
 \keyword{internal}

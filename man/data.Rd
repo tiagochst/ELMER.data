@@ -9,6 +9,9 @@ Gene Expression data: 1026 genes
 for 234 samples from TCGA-LUSC.
 This data is used in the examples of ELMER package}
 \format{A MultiAssayExperiment for 234 Samples (8 normal samples, 226 Primary solid tumor)}
+\usage{
+data
+}
 \description{
 A MultiAssayExperiment containing
 DNA methylation data: 101 probes from platform 450K 
@@ -17,6 +20,8 @@ for 234 samples from TCGA-LUSC.
 This data is used in the examples of ELMER package
 }
 \examples{
+\dontrun{
 data("elmer.data.example")
+}
 }
 \keyword{internal}

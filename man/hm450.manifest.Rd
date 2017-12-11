@@ -5,10 +5,15 @@
 \alias{hm450.manifest}
 \title{A GRanges containing hg19 annotation with suggested overall masking for hm450 platform}
 \format{A GRanges with 485577 elements}
+\usage{
+hm450.manifest
+}
 \description{
 A GRanges containing hg19 annotation with suggested overall masking for hm450 platform
 }
 \examples{
-data("hm450.manifest")
+\dontrun{
+ data("hm450.manifest")
+}
 }
 \keyword{internal}

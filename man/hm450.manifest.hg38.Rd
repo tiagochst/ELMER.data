@@ -5,6 +5,9 @@
 \alias{hm450.manifest.hg38}
 \title{A GRanges containing hg38 annotation with suggested overall masking for hm450 platform}
 \format{A GRanges with 485577 elements}
+\usage{
+hm450.manifest.hg38
+}
 \description{
 A GRanges containing hg38 annotation with suggested overall masking for hm450 platform
 }

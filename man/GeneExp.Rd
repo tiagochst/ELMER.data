@@ -7,6 +7,9 @@
 Gene Expression data: 3842 genes
 This data is used in the examples of ELMER package}
 \format{A gene expression matrix for 234 Samples and 3842 genes}
+\usage{
+GeneExp
+}
 \description{
 A matrix containing gene expression data from TCGA
 Gene Expression data: 3842 genes

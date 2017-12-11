@@ -22,14 +22,13 @@ ELMER analysis:
     follwing command: \code{browseVignettes("ELMER.data")}
 }
 \examples{
-data("Probes.motif.hg38.EPIC")
-data("Probes.motif.hg19.EPIC")
-data("Probes.motif.hg38.450K")
-data("Probes.motif.hg19.450K")
-data("EPIC.manifest")
-data("EPIC.manifest.hg38")
-data("hm450.manifest")
-data("hm450.manifest.hg38")
-data("elmer.data.example")
+# Please see the datasets
+}
+\seealso{
+\code{\link[ELMER.data]{EPIC.manifest}}, \code{\link[ELMER.data]{EPIC.manifest.hg38}}, 
+\code{\link[imudata]{hm450.manifest}}, \code{\link[ELMER.data]{hm450.manifest.hg38}}, 
+\code{\link[ELMER.data]{Probes.motif.hg19.450K}}, \code{\link[ELMER.data]{Probes.motif.hg38.450K}}, 
+\code{\link[ELMER.data]{Probes.motif.hg38.EPIC}}, \code{\link[ELMER.data]{Probes.motif.hg19.EPIC}}, 
+\code{\link[ELMER.data]{TF.subfamily}}, \code{\link[ELMER.data]{TF.family}}, and \code{\link[ELMER.data]{TF.meth.cor}}
 }
 \keyword{utilities}

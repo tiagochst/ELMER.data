@@ -7,6 +7,9 @@
 Created with the following function from ELMER pacakge 
 TF.family <-  createMotifRelevantTfs("subfamily")}
 \format{A list of 641 motifs with TF subfamilies (with similar bidings)}
+\usage{
+TF.subfamily
+}
 \description{
 A list of 641 motifs with TF subfamilies (with similar bidings) from TFClass
 Created with the following function from ELMER pacakge 
