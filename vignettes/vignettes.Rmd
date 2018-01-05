@@ -66,10 +66,10 @@ references:
   issued:
     year: 2016
 vignette: >
-\usepackage[utf8]{inputenc}
+  \usepackage[utf8]{inputenc}
   %\VignetteIndexEntry{ELMER.data: Supporting data for the ELMER package}
   %\VignetteEngine{knitr::rmarkdown}
-  editor_options: 
+editor_options: 
   chunk_output_type: inline
 ---   
 
@@ -186,8 +186,8 @@ createMotifRelevantTfs <- function(classification = "family"){
 }
 TF.family <- createMotifRelevantTfs("family")
 TF.subfamily <- createMotifRelevantTfs("subfamily")
-save(TF.family,file = "TF.family.rda", compress = "xz")
-save(TF.subfamily,file = "TF.subfamily.rda", compress = "xz")
+save(TF.family,file = "data/TF.family.rda", compress = "xz")
+save(TF.subfamily,file = "data/TF.subfamily.rda", compress = "xz")
 ```
 
 ```{r, eval=FALSE, include=TRUE}
@@ -267,7 +267,7 @@ for(plat in c("450K","EPIC")){
       gr <- getInfiniumAnnotation(plat = plat,genome =  gen)
       
       # This will remove masked probes. They have poor quality and might be arbitrarily positioned (Wanding Zhou)
-      gr <- gr[!gr$MASK.general]
+      gr <- gr[!gr$MASK_general]
       
       df <- data.frame(seqnames=seqnames(gr),
                        starts=as.integer(start(gr)),
@@ -306,11 +306,10 @@ for(plat in c("450K","EPIC")){
     gc()
   }
 }
-}
 
 getMatrix <- function(filename) {
   motifs <- readr::read_tsv(file)
-  # From 1 to 21 we have annotations then we have 640 motifs
+  # From 1 to 21 we have annotations
   matrix <- Matrix::Matrix(0, nrow = nrow(motifs), ncol = ncol(motifs) - 21 ,sparse = TRUE)
   colnames(matrix) <- gsub(" Distance From Peak\\(sequence,strand,conservation\\)","",colnames(motifs)[-c(1:21)])
   rownames(matrix) <- motifs$PeakID
@@ -319,18 +318,6 @@ getMatrix <- function(filename) {
   return(matrix)
 }
 
-# This code will read the table with the motifs, save it as a sparce matrix
-# and save all as a .rda that will be placed in ELMER.data
-getMatrix <- function(filename) {
-  motifs <- readr::read_tsv(file)
-  # From 1 to 21 we have annotations then we have 640 motifs
-  matrix <- Matrix::Matrix(0, nrow = nrow(motifs), ncol = 640,sparse = TRUE)
-  colnames(matrix) <- gsub(" Distance From Peak\\(sequence,strand,conservation\\)","",colnames(motifs)[-c(1:21)])
-  rownames(matrix) <- motifs$PeakID
-  matrix[!is.na(motifs[,-c(1:21)])] <- 1
-  matrix <- as(matrix, "nsparseMatrix")
-  return(matrix)
-}
 for(plat in c("EPIC", "450K")){
   for(gen in c("hg19","hg38")){
     file <- paste0(plat,gen,".txt")
