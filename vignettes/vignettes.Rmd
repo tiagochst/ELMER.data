@@ -66,10 +66,10 @@ references:
   issued:
     year: 2016
 vignette: >
-  \usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
   %\VignetteIndexEntry{ELMER.data: Supporting data for the ELMER package}
   %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
+  editor_options: 
   chunk_output_type: inline
 ---   
 
@@ -112,12 +112,14 @@ Probes information were retrieved from [http://zwdzwd.github.io/InfiniumAnnotati
 for(plat in c("450K","EPIC")) {
   for(genome in c("hg38","hg19")) {
     base <- "http://zwdzwd.io/InfiniumAnnotation/current/"
+    path <- file.path(base,plat,paste(plat,"hg19.manifest.rds", sep ="."))
+    if (grepl("hg38", genome)) path <- gsub("hg19","hg38",path)
     if(plat == "EPIC") {
-      annotation <- paste0(base,"EPIC/EPIC.manifest.rda")
+      annotation <- paste0(base,"EPIC/EPIC.hg19.manifest.rds")
     } else {
-      annotation <- paste0(base,"hm450/hm450.manifest.rda")
+      annotation <- paste0(base,"hm450/hm450.hg19.manifest.rds")
     }
-    if(genome == "hg38") annotation <- gsub(".rda",".hg38.rda", annotation)
+    if(grepl("hg38", genome)) annotation <- gsub("hg19","hg38",annotation)
     if(!file.exists(basename(annotation))) {
       if(Sys.info()["sysname"] == "Windows") mode <- "wb" else  mode <- "w"
       downloader::download(annotation, basename(annotation), mode = mode)
@@ -126,14 +128,14 @@ for(plat in c("450K","EPIC")) {
 }
 ```
 ```{r, message=FALSE}
-data("EPIC.manifest")
-as.data.frame(EPIC.manifest)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
-data("EPIC.manifest.hg38")
-as.data.frame(EPIC.manifest.hg38)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
-data("hm450.manifest.hg38")
-as.data.frame(hm450.manifest.hg38)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
-data("hm450.manifest")
-as.data.frame(hm450.manifest)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
+data("EPIC.hg19.manifest")
+as.data.frame(EPIC.hg19.manifest)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
+data("EPIC.hg38.manifest")
+as.data.frame(EPIC.hg38.manifest)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
+data("hm450.hg19.manifest")
+as.data.frame(hm450.hg19.manifest)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
+data("hm450.hg38.manifest")
+as.data.frame(hm450.hg38.manifest)[1:5,] %>% datatable(options = list(scrollX = TRUE,pageLength = 5)) 
 ```
 
 ## TF family and subfamily classifications
@@ -161,25 +163,25 @@ library(rvest)
 createMotifRelevantTfs <- function(classification = "family"){
   message("Accessing hocomoco to get last version of TFs ", classification)
   file <- paste0(classification,".motif.relevant.TFs.rda")
-   
-    # Download from http://hocomoco.autosome.ru/human/mono
-    tf.family <- "http://hocomoco11.autosome.ru/human/mono?full=true" %>% read_html()  %>%  html_table()
-    tf.family <- tf.family[[1]]
-    # Split TF for each family, this will help us map for each motif which are the some ones in the family
-    # basicaly: for a TF get its family then get all TF in that family
-    col <- ifelse(classification == "family", "TF family","TF subfamily")
-    family <- split(tf.family,f = tf.family[[col]])
-    
-    motif.relevant.TFs <- plyr::alply(tf.family,1, function(x){  
-      f <- x[[col]]
-      if(f == "") return(x$`Transcription factor`) # Case without family, we will get only the same object
-      return(unique(family[as.character(f)][[1]]$`Transcription factor`))
-    },.progress = "text")
-    #names(motif.relevant.TFs) <- tf.family$`Transcription factor`
-    names(motif.relevant.TFs) <- tf.family$Model
-    # Cleaning object
-    attr(motif.relevant.TFs,which="split_type") <- NULL
-    attr(motif.relevant.TFs,which="split_labels") <- NULL
+  
+  # Download from http://hocomoco.autosome.ru/human/mono
+  tf.family <- "http://hocomoco11.autosome.ru/human/mono?full=true" %>% read_html()  %>%  html_table()
+  tf.family <- tf.family[[1]]
+  # Split TF for each family, this will help us map for each motif which are the some ones in the family
+  # basicaly: for a TF get its family then get all TF in that family
+  col <- ifelse(classification == "family", "TF family","TF subfamily")
+  family <- split(tf.family,f = tf.family[[col]])
+  
+  motif.relevant.TFs <- plyr::alply(tf.family,1, function(x){  
+    f <- x[[col]]
+    if(f == "") return(x$`Transcription factor`) # Case without family, we will get only the same object
+    return(unique(family[as.character(f)][[1]]$`Transcription factor`))
+  },.progress = "text")
+  #names(motif.relevant.TFs) <- tf.family$`Transcription factor`
+  names(motif.relevant.TFs) <- tf.family$Model
+  # Cleaning object
+  attr(motif.relevant.TFs,which="split_type") <- NULL
+  attr(motif.relevant.TFs,which="split_labels") <- NULL
   return(motif.relevant.TFs)
 }
 TF.family <- createMotifRelevantTfs("family")
@@ -238,10 +240,10 @@ The following code was used to create the objects:
 getInfiniumAnnotation <- function(plat = "450K", genome = "hg38"){
   message("Loading object: ",file)
   newenv <- new.env()
-  if(plat == "EPIC" & genome == "hg19") data("EPIC.manifest", package = "ELMER.data",envir=newenv)
-  if(plat == "EPIC" & genome == "hg38") data("EPIC.manifest.hg38", package = "ELMER.data",envir=newenv)
-  if(plat == "450K" & genome == "hg19") data("hm450.manifest", package = "ELMER.data",envir=newenv)
-  if(plat == "450K" & genome == "hg38") data("hm450.manifest.hg38", package = "ELMER.data",envir=newenv)
+  if(plat == "EPIC" & genome == "hg19") data("EPIC.hg19.manifest", package = "ELMER.data",envir=newenv)
+  if(plat == "EPIC" & genome == "hg38") data("EPIC.hg38.manifest", package = "ELMER.data",envir=newenv)
+  if(plat == "450K" & genome == "hg19") data("hm450.hg19.manifest", package = "ELMER.data",envir=newenv)
+  if(plat == "450K" & genome == "hg38") data("hm450.hg38.manifest", package = "ELMER.data",envir=newenv)
   annotation <- get(ls(newenv)[1],envir=newenv)   
   return(annotation)  
 }
@@ -258,52 +260,52 @@ if(!file.exists(basename(TFBS.motif))) downloader::download(TFBS.motif,basename(
 for(plat in c("450K","EPIC")){
   for(gen in c("hg19","hg38")){
     
-      file <- paste0(plat,gen,".txt")
-      print(file)
-      if(!file.exists(file)){
-        # STEP 1
-        gr <- getInfiniumAnnotation(plat = plat,genome =  gen)
-        
-        # This will remove masked probes. They have poor quality and might be arbitrarily positioned (Wanding Zhou)
-        gr <- gr[!gr$MASK.general]
-
-        df <- data.frame(seqnames=seqnames(gr),
-                         starts=as.integer(start(gr)),
-                         ends=end(gr),
-                         names=names(gr),
-                         scores=c(rep(".", length(gr))),
-                         strands=strand(gr))
-        step <- 10000 # nb of lines in each file. 10K was selected to not explode RAM
-        n <- nrow(df)
-        for(j in 0:floor(n/step)){
-          # STEP 2
-          file.aux <- paste0(plat,gen,"_",j,".bed")
-          if(!file.exists(gsub(".bed",".txt",file.aux))){
-            end <- ifelse(((j + 1) * step) > n, n,((j + 1) * step))
-            write.table(df[((j * step) + 1):end,], file = file.aux, col.names = F, quote = F,row.names = F,sep = "\t")
-            
-            # STEP 3 use -mscore to get scores
-            cmd <- paste("source ~/.bash_rc; annotatePeaks.pl" ,file.aux, gen, "-m", basename(TFBS.motif), "-size 500 -cpu 12 >", gsub(".bed",".txt",file.aux))
-            system(cmd)
-          }
-        }
-      }
-      # We will merge the results from each file into one
-      peaks <- NULL
+    file <- paste0(plat,gen,".txt")
+    print(file)
+    if(!file.exists(file)){
+      # STEP 1
+      gr <- getInfiniumAnnotation(plat = plat,genome =  gen)
+      
+      # This will remove masked probes. They have poor quality and might be arbitrarily positioned (Wanding Zhou)
+      gr <- gr[!gr$MASK.general]
+      
+      df <- data.frame(seqnames=seqnames(gr),
+                       starts=as.integer(start(gr)),
+                       ends=end(gr),
+                       names=names(gr),
+                       scores=c(rep(".", length(gr))),
+                       strands=strand(gr))
+      step <- 10000 # nb of lines in each file. 10K was selected to not explode RAM
+      n <- nrow(df)
       for(j in 0:floor(n/step)){
-        aux <-  readr::read_tsv(paste0(plat,gen,"_",j,".txt"))
-        colnames(aux)[1] <- "PeakID"
-        if(is.null(peaks)) {
-          peaks <- aux
-        } else {
-          peaks <- rbind(peaks, aux)
+        # STEP 2
+        file.aux <- paste0(plat,gen,"_",j,".bed")
+        if(!file.exists(gsub(".bed",".txt",file.aux))){
+          end <- ifelse(((j + 1) * step) > n, n,((j + 1) * step))
+          write.table(df[((j * step) + 1):end,], file = file.aux, col.names = F, quote = F,row.names = F,sep = "\t")
+          
+          # STEP 3 use -mscore to get scores
+          cmd <- paste("source ~/.bash_rc; annotatePeaks.pl" ,file.aux, gen, "-m", basename(TFBS.motif), "-size 500 -cpu 12 >", gsub(".bed",".txt",file.aux))
+          system(cmd)
         }
       }
-      readr::write_tsv(peaks,path=file,col_names = TRUE)
-      print("DONE!")
-      gc()
     }
+    # We will merge the results from each file into one
+    peaks <- NULL
+    for(j in 0:floor(n/step)){
+      aux <-  readr::read_tsv(paste0(plat,gen,"_",j,".txt"))
+      colnames(aux)[1] <- "PeakID"
+      if(is.null(peaks)) {
+        peaks <- aux
+      } else {
+        peaks <- rbind(peaks, aux)
+      }
+    }
+    readr::write_tsv(peaks,path=file,col_names = TRUE)
+    print("DONE!")
+    gc()
   }
+}
 }
 
 getMatrix <- function(filename) {

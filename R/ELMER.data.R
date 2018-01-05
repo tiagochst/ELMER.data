@@ -30,50 +30,50 @@ NULL
 #' A GRanges containing hg19 annotation with suggested overall masking for EPIC platform
 #' @docType data
 #' @keywords internal
-#' @name EPIC.manifest
+#' @name EPIC.hg19.manifest
 #' @import GenomicRanges
 #' @format A GRanges with 866895 elements
 #' @examples
 #' \dontrun{
-#' data("EPIC.manifest")
+#' data("EPIC.hg19.manifest")
 #' }
-"EPIC.manifest"
+"EPIC.hg19.manifest"
 
 #' A GRanges containing hg38 annotation with suggested overall masking for EPIC platform
 #' @docType data
 #' @keywords internal
-#' @name EPIC.manifest.hg38
+#' @name EPIC.hg38.manifest
 #' @import GenomicRanges
 #' @format A GRanges with 866895 elements
 #' @examples
 #' \dontrun{
-#' data("EPIC.manifest.hg38")
+#' data("EPIC.hg38.manifest")
 #' }
-"EPIC.manifest.hg38"
+"EPIC.hg38.manifest"
 
 #' A GRanges containing hg38 annotation with suggested overall masking for hm450 platform
 #' @docType data
 #' @keywords internal
-#' @name hm450.manifest.hg38
+#' @name hm450.hg38.manifest
 #' @import GenomicRanges
 #' @format A GRanges with 485577 elements
 #' @examples
 #' \dontrun{
-#' data("hm450.manifest.hg38")
+#' data("hm450.hg38.manifest")
 #' }
-"hm450.manifest.hg38"
+"hm450.hg38.manifest"
 
 #' A GRanges containing hg19 annotation with suggested overall masking for hm450 platform
 #' @docType data
 #' @keywords internal
-#' @name hm450.manifest
+#' @name hm450.hg19.manifest
 #' @import GenomicRanges
 #' @format A GRanges with 485577 elements
 #' @examples
 #' \dontrun{
-#'  data("hm450.manifest")
+#'  data("hm450.hg19.manifest")
 #'}
-"hm450.manifest"
+"hm450.hg19.manifest"
 
 #' A matrix with 1 if the probe (row) has a motif (column)
 #' @description 
