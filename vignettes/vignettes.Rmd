@@ -66,10 +66,10 @@ references:
   issued:
     year: 2016
 vignette: >
-  \usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
   %\VignetteIndexEntry{ELMER.data: Supporting data for the ELMER package}
   %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
+  editor_options: 
   chunk_output_type: inline
 ---   
 
@@ -257,8 +257,8 @@ getInfiniumAnnotation <- function(plat = "450K", genome = "hg38"){
 # The false posives will be removed latter with some statistical tests.
 TFBS.motif <- "http://hocomoco11.autosome.ru/final_bundle/hocomoco11/full/HUMAN/mono/HOCOMOCOv11_full_HUMAN_mono_homer_format_0.0001.motif"
 if(!file.exists(basename(TFBS.motif))) downloader::download(TFBS.motif,basename(TFBS.motif))
-for(plat in c("450K","EPIC")){
-  for(gen in c("hg19","hg38")){
+for(plat in c("EPIC","450K")){
+  for(gen in c("hg38","hg19")){
     
     file <- paste0(plat,gen,".txt")
     print(file)
@@ -277,7 +277,10 @@ for(plat in c("450K","EPIC")){
                        strands=strand(gr))
       step <- 10000 # nb of lines in each file. 10K was selected to not explode RAM
       n <- nrow(df)
+      pb <- txtProgressBar(max = floor(n/step), style = 3)
+      
       for(j in 0:floor(n/step)){
+        setTxtProgressBar(pb, j)
         # STEP 2
         file.aux <- paste0(plat,gen,"_",j,".bed")
         if(!file.exists(gsub(".bed",".txt",file.aux))){
@@ -290,9 +293,12 @@ for(plat in c("450K","EPIC")){
         }
       }
     }
+    close(pb)
     # We will merge the results from each file into one
     peaks <- NULL
+    pb <- txtProgressBar(max = floor(n/step), style = 3)
     for(j in 0:floor(n/step)){
+      setTxtProgressBar(pb, j)
       aux <-  readr::read_tsv(paste0(plat,gen,"_",j,".txt"))
       colnames(aux)[1] <- "PeakID"
       if(is.null(peaks)) {
@@ -301,6 +307,8 @@ for(plat in c("450K","EPIC")){
         peaks <- rbind(peaks, aux)
       }
     }
+    close(pb)
+    print("Writing file...")
     readr::write_tsv(peaks,path=file,col_names = TRUE)
     print("DONE!")
     gc()
@@ -318,27 +326,33 @@ getMatrix <- function(filename) {
   return(matrix)
 }
 
-for(plat in c("EPIC", "450K")){
+for(plat in c("EPIC","450K")){
   for(gen in c("hg19","hg38")){
     file <- paste0(plat,gen,".txt")
+    
     if(file == "450Khg19.txt"){
+      if(file.exists("Probes.motif.hg19.450K.rda")) next
       Probes.motif.hg19.450K <- getMatrix(file)
       save(Probes.motif.hg19.450K, file = "Probes.motif.hg19.450K.rda", compress = "xz")
       rm(Probes.motif.hg19.450K)
     } 
     if(file == "450Khg38.txt"){
+      if(file.exists("Probes.motif.hg38.450K.rda")) next
       Probes.motif.hg38.450K <- getMatrix(file)
       save(Probes.motif.hg38.450K, file = "Probes.motif.hg38.450K.rda", compress = "xz")
       rm(Probes.motif.hg38.450K)
     }
     
     if(file == "EPIChg19.txt"){
+      if(file.exists("Probes.motif.hg19.EPIC.rda")) next
       Probes.motif.hg19.EPIC <- getMatrix(file)
       save(Probes.motif.hg19.EPIC, file = "Probes.motif.hg19.EPIC.rda", compress = "xz")
       rm(Probes.motif.hg19.EPIC)
     }
     
     if(file == "EPIChg38.txt"){
+      if(file.exists("Probes.motif.hg38.EPIC.rda")) next
+      
       Probes.motif.hg38.EPIC <- getMatrix(file)
       save(Probes.motif.hg38.EPIC, file = "Probes.motif.hg38.EPIC.rda", compress = "xz")
       rm(Probes.motif.hg38.EPIC)
