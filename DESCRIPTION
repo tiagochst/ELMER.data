@@ -1,0 +1,41 @@
+Package: ELMER.data
+Title: Data for the ELMER package
+Version: 2.3.4
+Author: Tiago Chedraoui Silva,
+        Lijing Yao
+        Simon Coetzee,
+        Ben Berman
+Maintainer: Tiago Chedraoui Silva <tiagochst@usp.br>
+Description: 
+    Supporting data for the ELMER package. 
+    It includes:
+     - elmer.data.example.promoter: mae.promoter
+     - elmer.data.example: data
+     - EPIC.hg38.manifest
+     - EPIC.hg19.manifest
+     - hm450.hg38.manifest
+     - hm450.hg19.manifest
+     - hocomoco.table
+     - LUSC_meth_refined: Meth
+     - LUSC_RNA_refined: GeneExp
+     - Probes.motif.hg19.450K
+     - Probes.motif.hg19.EPIC
+     - Probes.motif.hg38.450K
+     - Probes.motif.hg38.EPIC
+     - TF.family
+     - TF.subfamily
+License: GPL-3
+LazyData: false
+Depends:
+    R (>= 3.2.0)
+Imports:
+    GenomicRanges
+Suggests:
+    BiocStyle,
+    knitr,
+    dplyr,
+    devtools,
+    DT
+biocViews: AssayDomainData, TechnologyData, OrganismData
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
