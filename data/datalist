@@ -5,6 +5,7 @@ EPIC.manifest
 hm450.manifest.hg38
 hm450.manifest
 hocomoco.table
+human.TF
 LUSC_meth_refined: Meth
 LUSC_RNA_refined: GeneExp
 Probes.motif.hg19.450K
