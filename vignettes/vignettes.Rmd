@@ -1,6 +1,6 @@
 ---
 title: "ELMER.data: Supporting data for the ELMER package"
-author: "Tiago Chedraoui Silva, Simon Coetzee, Lijing Yao, Peggy Farnham, Hui Shen, Peter Laird, Houtan Noushmehr, Ben Berman"
+author: "Tiago Chedraoui Silva, Simon Coetzee, Nicole Gull, Lijing Yao, Peggy Farnham, Hui Shen, Peter Laird, Houtan Noushmehr, De-Chen Lin, Benjamin P. Berman"
 date: "`r Sys.Date()`"
 output: 
     BiocStyle::html_document:
@@ -126,6 +126,7 @@ for(plat in c("450K","EPIC")) {
     }
   }
 }
+
 devtools::use_data(EPIC.hg19.manifest,overwrite = T,compress = "xz")
 devtools::use_data(EPIC.hg38.manifest,overwrite = T,compress = "xz")
 devtools::use_data(hm450.hg19.manifest,overwrite = T,compress = "xz")
