@@ -388,6 +388,7 @@ A curated list of TF was retrieved from Lambert, Samuel A., et al. "The human tr
 ```{r, eval=FALSE, include=TRUE}
 human.TF <- readr::read_csv("http://humantfs.ccbr.utoronto.ca/download/v_1.01/DatabaseExtract_v_1.01.csv")
 human.TF <- human.TF[human.TF$`Is TF?` == "Yes",]
+colnames(human.TF)[1:2] <- c("ensembl_gene_id","external_gene_name")
 save(human.TF,file = "~/ELMER.data/data/human.TF.rda",compress = "xz")
 ```
 
