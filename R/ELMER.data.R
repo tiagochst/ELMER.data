@@ -243,13 +243,10 @@ NULL
 #' @format A dataframe with 771 rows (motifs) and 20 columns
 "hocomoco.table"
 
-
-
 #' Table parsed from Lambert, Samuel A., et al. "The human transcription factors." Cell 172.4 (2018): 650-665.
 #' @docType data
 #' @keywords internal
 #' @name human.TF
 #' @format A dataframe with 1639 rows (motifs) and 27 columns
 "human.TF"
-
 
