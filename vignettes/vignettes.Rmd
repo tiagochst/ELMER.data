@@ -126,13 +126,10 @@ for(plat in c("450K","EPIC")) {
     }
   }
 }
-<<<<<<< HEAD
 devtools::use_data(EPIC.hg19.manifest,overwrite = T,compress = "xz")
 devtools::use_data(EPIC.hg38.manifest,overwrite = T,compress = "xz")
 devtools::use_data(hm450.hg19.manifest,overwrite = T,compress = "xz")
 devtools::use_data(hm450.hg38.manifest,overwrite = T,compress = "xz")
-=======
->>>>>>> 704e083d2bab8a8676b819a55880e8c496caf9e6
 ```
 ```{r, message=FALSE}
 data("EPIC.hg19.manifest")
