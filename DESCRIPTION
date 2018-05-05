@@ -1,6 +1,6 @@
 Package: ELMER.data
 Title: Data for the ELMER package
-Version: 2.3.4
+Version: 2.4.1
 Author: Tiago Chedraoui Silva,
         Lijing Yao
         Simon Coetzee,
@@ -16,6 +16,7 @@ Description:
      - hm450.hg38.manifest
      - hm450.hg19.manifest
      - hocomoco.table
+     - human.TF
      - LUSC_meth_refined: Meth
      - LUSC_RNA_refined: GeneExp
      - Probes.motif.hg19.450K

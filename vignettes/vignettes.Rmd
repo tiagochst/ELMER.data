@@ -371,6 +371,16 @@ as.data.frame(as.matrix(Probes.motif.hg19.450K[1:20,1:20])) %>%
   datatable(options = list(scrollX = TRUE,pageLength = 5)) 
 ```
 
+## TF list
+
+A curated list of TF was retrieved from Lambert, Samuel A., et al. "The human transcription factors." Cell 172.4 (2018): 650-665 with the following code.
+```{r}
+human.TF <- readr::read_csv("http://humantfs.ccbr.utoronto.ca/download/v_1.01/DatabaseExtract_v_1.01.csv")
+human.TF <- human.TF[human.TF$`Is TF?` == "Yes",]
+save(human.TF,file = "~/ELMER.data/data/human.TF.rda",compress = "xz")
+```
+
+
 <div class="panel panel-info">
 <div class="panel-heading">Homer versions</div>
 <div class="panel-body">
