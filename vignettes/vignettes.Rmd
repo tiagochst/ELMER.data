@@ -78,7 +78,7 @@ vignette: >
    \usepackage[utf8]{inputenc}
   %\VignetteIndexEntry{ELMER.data: Supporting data for the ELMER package}
   %\VignetteEngine{knitr::rmarkdown}
-  editor_options: 
+editor_options: 
   chunk_output_type: inline
 ---   
 
