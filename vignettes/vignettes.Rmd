@@ -113,6 +113,19 @@ library("GenomicRanges")
 
 # Contents
 
+## ENSEMBL gene and TSS information
+
+Data from GRCh38.p12 and GRCh37.p13 accessed via biomart.
+
+```{r, eval=FALSE, include=TRUE}
+ensembl.tss.hg19 <- ELMER:::getTSS(genome = "hg19")
+ensembl.tss.hg38 <- ELMER:::getTSS(genome = "hg38")
+ensembl.genes.hg19 <- TCGAbiolinks::get.GRCh.bioMart("hg19")
+ensembl.genes.hg38 <- TCGAbiolinks::get.GRCh.bioMart("hg38")
+save(ensembl.tss.hg19, ensembl.tss.hg38,ensembl.genes.hg19,ensembl.genes.hg38, 
+     file = "ensembl.rda", compress = "xz")
+```
+
 ## Probes information
 
 Probes information were retrieved from [http://zwdzwd.github.io/InfiniumAnnotation](http://zwdzwd.github.io/InfiniumAnnotation) [@zhou2016comprehensive].
