@@ -254,6 +254,7 @@ NULL
 #' A matrix containing ENSEMBL hg19 transcripts metadata accessed using biomart
 #' This data is used if ensembl cannot be reached
 #' @docType data
+#' @name Human_genes__GRCh37_p13__tss
 #' @keywords internal
 #' @format A matrix with metadata for 196317 transcripts
 "Human_genes__GRCh37_p13__tss"
@@ -263,6 +264,7 @@ NULL
 #' This data is used if ensembl cannot be reached
 #' @docType data
 #' @keywords internal
+#' @name Human_genes__GRCh38_p12__tss
 #' @format A matrix with metadata for 208423 transcripts
 "Human_genes__GRCh38_p12__tss"
 
@@ -270,12 +272,14 @@ NULL
 #' This data is used if ensembl cannot be reached
 #' @docType data
 #' @keywords internal
+#' @name Human_genes__GRCh37_p13
 #' @format A matrix with metadata for 60482 genes
 "Human_genes__GRCh37_p13"
 
 #' A matrix containing ENSEMBL hg38 gene metadata accessed using biomart
 #' This data is used if ensembl cannot be reached
 #' @docType data
+#' @name Human_genes__GRCh38_p12
 #' @keywords internal
 #' @format A matrix with metadata for 58639 genes
 "Human_genes__GRCh38_p12"
