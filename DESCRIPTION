@@ -32,7 +32,7 @@ Description:
 License: GPL-3
 LazyData: false
 Depends:
-    R (>= 3.2.0)
+    R (>= 3.5.0)
 Imports:
     GenomicRanges
 Suggests:
