@@ -118,12 +118,133 @@ library("GenomicRanges")
 Data from GRCh38.p12 and GRCh37.p13 accessed via biomart.
 
 ```{r, eval=FALSE, include=TRUE}
-ensembl.tss.hg19 <- ELMER:::getTSS(genome = "hg19")
-ensembl.tss.hg38 <- ELMER:::getTSS(genome = "hg38")
-ensembl.genes.hg19 <- TCGAbiolinks::get.GRCh.bioMart("hg19")
-ensembl.genes.hg38 <- TCGAbiolinks::get.GRCh.bioMart("hg38")
-save(ensembl.tss.hg19, ensembl.tss.hg38,ensembl.genes.hg19,ensembl.genes.hg38, 
-     file = "ensembl.rda", compress = "xz")
+
+getTranscripts <- function(genome = "hg38"){
+  
+  tries <- 0L
+  msg <- character()
+  while (tries < 3L) {
+    tss <- tryCatch({
+      host <- ifelse(genome == "hg19",  "grch37.ensembl.org","www.ensembl.org")
+      message("Accessing ", host, " to get TSS information")
+      
+      ensembl <- tryCatch({
+        useEnsembl("ensembl", dataset = "hsapiens_gene_ensembl", host =  host)
+      },  error = function(e) {
+        message(e)
+        for(mirror in c("asia","useast","uswest")){
+          x <- useEnsembl("ensembl",
+                          dataset = "hsapiens_gene_ensembl",
+                          mirror = mirror,
+                          host =  host)
+          if(class(x) == "Mart") {
+            return(x)
+          }
+        }
+        return(NULL)
+      })
+      
+      if(is.null(host)) {
+        message("Problems accessing ensembl database")
+        return(NULL)
+      }
+      attributes <- c("chromosome_name",
+                      "start_position",
+                      "end_position", "strand",
+                      "ensembl_gene_id", 
+                      "transcription_start_site",
+                      "transcript_start",
+                      "ensembl_transcript_id",
+                      "transcript_end",
+                      "external_gene_name")
+      chrom <- c(1:22, "X", "Y","M","*")
+      db.datasets <- listDatasets(ensembl)
+      description <- db.datasets[db.datasets$dataset=="hsapiens_gene_ensembl",]$description
+      message(paste0("Downloading transcripts information from ", ensembl@host, ". Using: ", description))
+      
+      filename <-  paste0(gsub("[[:punct:]]| ", "_",description),"_tss.rda")
+      tss <- getBM(attributes = attributes, filters = c("chromosome_name"), values = list(chrom), mart = ensembl)
+      tss <- tss[!duplicated(tss$ensembl_transcript_id),]
+      save(tss, file = filename, compress = "xz")
+    })
+  }
+  return(tss)
+}
+
+getGenes <- function (genome = "hg19"){
+  tries <- 0L
+  msg <- character()
+  while (tries < 3L) {
+    gene.location <- tryCatch({
+      host <- ifelse(genome == "hg19", "grch37.ensembl.org", 
+                     "www.ensembl.org")
+      message("Accessing ", host, " to get gene information")
+      ensembl <- tryCatch({
+        useEnsembl("ensembl", dataset = "hsapiens_gene_ensembl", 
+                   host = host)
+      }, error = function(e) {
+        message(e)
+        for (mirror in c("asia", "useast", "uswest")) {
+          x <- useEnsembl("ensembl", dataset = "hsapiens_gene_ensembl", 
+                          mirror = mirror, host = host)
+          if (class(x) == "Mart") {
+            return(x)
+          }
+        }
+        return(NULL)
+      })
+      if (is.null(host)) {
+        message("Problems accessing ensembl database")
+        return(NULL)
+      }
+      attributes <- c("chromosome_name", "start_position", 
+                      "end_position", "strand", "ensembl_gene_id", 
+                      "entrezgene", "external_gene_name")
+      db.datasets <- listDatasets(ensembl)
+      description <- db.datasets[db.datasets$dataset == 
+                                   "hsapiens_gene_ensembl", ]$description
+      message(paste0("Downloading genome information (try:", 
+                     tries, ") Using: ", description))
+      filename <- paste0(gsub("[[:punct:]]| ", "_", description), 
+                         ".rda")
+      if (!file.exists(filename)) {
+        chrom <- c(1:22, "X", "Y")
+        gene.location <- getBM(attributes = attributes, 
+                               filters = c("chromosome_name"), values = list(chrom), 
+                               mart = ensembl)
+      }
+      gene.location
+    }, error = function(e) {
+      msg <<- conditionMessage(e)
+      tries <<- tries + 1L
+    })
+    if (!is.null(gene.location)) break
+  }
+  if (tries == 3L) 
+    stop("failed to get URL after 3 tries:", "\n  error: ", msg)
+  
+  return(gene.location)
+}
+
+Human_genes__GRCh37_p13__tss <- getTranscripts(genome = "hg19")
+Human_genes__GRCh38_p12__tss <- getTranscripts(genome = "hg38")
+Human_genes__GRCh37_p13 <- getGenes("hg19")
+Human_genes__GRCh38_p12 <- getGenes("hg38")
+save(Human_genes__GRCh37_p13__tss,
+     file = "Human_genes__GRCh37_p13__tss.rda", 
+     compress = "xz")
+     
+save(Human_genes__GRCh38_p12,
+     file = "Human_genes__GRCh38_p12.rda", 
+     compress = "xz")
+     
+save(Human_genes__GRCh38_p12__tss,
+     file = "Human_genes__GRCh38_p12__tss.rda", 
+     compress = "xz")
+     
+save(Human_genes__GRCh37_p13,
+     file = "Human_genes__GRCh37_p13.rda", 
+     compress = "xz")     
 ```
 
 ## Probes information
