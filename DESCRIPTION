@@ -25,10 +25,10 @@ Description:
      - Probes.motif.hg38.EPIC
      - TF.family
      - TF.subfamily
-     - ensembl.tss.hg19
-     - ensembl.tss.hg38 
-     - ensembl.genes.hg19 
-     - ensembl.genes.hg38
+     - Human_genes__GRCh37_p13      
+     - Human_genes__GRCh38_p12
+     - Human_genes__GRCh37_p13__tss 
+     - Human_genes__GRCh38_p12__tss
 License: GPL-3
 LazyData: false
 Depends:
@@ -43,4 +43,4 @@ Suggests:
     DT
 biocViews: AssayDomainData, TechnologyData, OrganismData
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
