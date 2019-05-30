@@ -1,6 +1,6 @@
 Package: ELMER.data
 Title: Data for the ELMER package
-Version: 2.9.0
+Version: 2.9.1
 Author: Tiago Chedraoui Silva,
         Lijing Yao
         Simon Coetzee,
@@ -25,6 +25,10 @@ Description:
      - Probes.motif.hg38.EPIC
      - TF.family
      - TF.subfamily
+     - ensembl.tss.hg19
+     - ensembl.tss.hg38 
+     - ensembl.genes.hg19 
+     - ensembl.genes.hg38
 License: GPL-3
 LazyData: false
 Depends:
