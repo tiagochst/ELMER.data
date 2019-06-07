@@ -1,10 +1,10 @@
 Package: ELMER.data
 Title: Data for the ELMER package
-Version: 2.9.2
+Version: 2.9.3
 Author: Tiago Chedraoui Silva,
         Lijing Yao
         Simon Coetzee,
-        Ben Berman
+        Benjamin P. Berman
 Maintainer: Tiago Chedraoui Silva <tiagochst@usp.br>
 Description: 
     Supporting data for the ELMER package. 

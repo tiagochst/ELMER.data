@@ -15,10 +15,12 @@
 #' For more information how to create these objects please read the vignette of this package with the
 #' follwing command: \code{browseVignettes("ELMER.data")}
 #' @docType package
-#' @seealso \code{\link[ELMER.data]{EPIC.manifest}}, \code{\link[ELMER.data]{EPIC.manifest.hg38}}, 
-#' \code{\link[ELMER.data]{hm450.manifest}}, \code{\link[ELMER.data]{hm450.manifest.hg38}}, 
+#' @seealso \code{\link[ELMER.data]{EPIC.hg19.manifest}}, \code{\link[ELMER.data]{EPIC.hg38.manifest}}, 
+#' \code{\link[ELMER.data]{hm450.hg19.manifest}}, \code{\link[ELMER.data]{hm450.hg38.manifest}}, 
 #' \code{\link[ELMER.data]{Probes.motif.hg19.450K}}, \code{\link[ELMER.data]{Probes.motif.hg38.450K}}, 
 #' \code{\link[ELMER.data]{Probes.motif.hg38.EPIC}}, \code{\link[ELMER.data]{Probes.motif.hg19.EPIC}}, 
+#' \code{\link[ELMER.data]{Human_genes__GRCh37_p13__tss}}, \code{\link[ELMER.data]{Human_genes__GRCh37_p13}},
+#' \code{\link[ELMER.data]{Human_genes__GRCh38_p12}}, \code{\link[ELMER.data]{Human_genes__GRCh38_p12__tss}},
 #' \code{\link[ELMER.data]{TF.subfamily}}, \code{\link[ELMER.data]{TF.family}}, and \code{\link[ELMER.data]{hocomoco.table}}
 #' @name ELMER.data
 #' @exportPattern ^[[:alpha:]]+

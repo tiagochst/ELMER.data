@@ -12,9 +12,9 @@ Probes.motif.hg19.450K
 Probes.motif.hg19.EPIC
 Probes.motif.hg38.450K
 Probes.motif.hg38.EPIC
-Human_genes__GRCh37_p13      
+Human_genes__GRCh37_p13
 Human_genes__GRCh38_p12
-Human_genes__GRCh37_p13__tss  
+Human_genes__GRCh37_p13__tss
 Human_genes__GRCh38_p12__tss
 TF.family
 TF.subfamily
