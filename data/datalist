@@ -1,9 +1,9 @@
 elmer.data.example.promoter: mae.promoter
 elmer.data.example: data
-EPIC.manifest.hg38
-EPIC.manifest
-hm450.manifest.hg38
-hm450.manifest
+EPIC.hg38.manifest
+EPIC.hg19.manifest
+hm450.hg38.manifest
+hm450.hg19.manifest
 hocomoco.table
 human.TF
 LUSC_meth_refined: Meth
