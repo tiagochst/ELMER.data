@@ -72,6 +72,7 @@ r_github_packages:
   - kevinushey/later
   - hfang-bristol/dnet
   - PoisonAlien/maftools
+  - r-lib/later
 
 after_script:
   - ls -lah
