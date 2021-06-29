@@ -1,11 +1,11 @@
 Package: ELMER.data
 Title: Data for the ELMER package
-Version: 2.17.0
+Version: 2.17.1
 Author: Tiago Chedraoui Silva,
         Lijing Yao
         Simon Coetzee,
         Benjamin P. Berman
-Maintainer: Tiago Chedraoui Silva <tiagochst@usp.br>
+Maintainer: Tiago Chedraoui Silva <tiagochst@gmail.com>
 Description: 
     Supporting data for the ELMER package. 
     It includes:
@@ -40,7 +40,8 @@ Suggests:
     knitr,
     dplyr,
     devtools,
-    DT
+    DT,
+    rmarkdown
 biocViews: AssayDomainData, TechnologyData, OrganismData
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
